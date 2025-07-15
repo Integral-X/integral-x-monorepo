@@ -1,0 +1,27 @@
+{
+  "name": "integral-x-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "build": "nx build",
+    "start": "nx serve",
+    "test": "nx test",
+    "lint": "nx lint",
+    "format": "nx format:write"
+  },
+  "devDependencies": {
+    "@nrwl/nx": "latest",
+    "@nrwl/node": "latest",
+    "@nrwl/workspace": "latest",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

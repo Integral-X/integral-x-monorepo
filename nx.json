@@ -1,0 +1,10 @@
+{
+  "npmScope": "integral-x",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  }
+}
