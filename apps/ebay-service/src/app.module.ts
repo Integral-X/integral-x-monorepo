@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HealthModule } from './modules/health.module';
+import { ListingModule } from './modules/listing.module';
 import { validationSchema } from './config/validation';
 import { getTypeOrmConfig } from './db/typeorm.config';
 
@@ -18,6 +19,7 @@ import { getTypeOrmConfig } from './db/typeorm.config';
       inject: [ConfigService],
     }),
     HealthModule,
+    ListingModule,
   ],
 })
-export class AppModule {} 
+export class AppModule {}
