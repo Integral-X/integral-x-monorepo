@@ -79,7 +79,7 @@ yarn install
 ```
 
 ### 3. Set Up Environment Variables
-- Copy the example `.env` files for each service to `.env`, see examples.
+- Copy the example `.env` files for each service to `.env`. See the [Example .env Files](#example-env-files) section below.
 - Edit values as needed for your local setup.
 
 #### Example .env Files
