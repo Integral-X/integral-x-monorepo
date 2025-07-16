@@ -18,6 +18,6 @@ jobs:
       - name: Lint all projects
         run: npx nx run-many --target=lint --all
       - name: Test all projects
-        run: yarn test
+        run: npx nx run-many --target=test --all
       - name: Build all projects
         run: yarn build 
