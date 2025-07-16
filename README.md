@@ -15,21 +15,21 @@ Enterprise-grade, scalable microservices architecture for integrating major mark
 ### ASCII Diagram
 
 ```
-                +-------------------+
-                |   Frontend App    |
-                |   (React, etc.)   |
-                +---------+---------+
-                          |
-                          |  (GraphQL Request)
-                          v
-                +-------------------+
-                |   API Gateway     |
-                | (NestJS, GraphQL) |
-                +---------+---------+
-                          |
-         +----------------+----------------+
-         |                |                |
-         v                v                v
+                    +-------------------+
+                    |   Frontend App    |
+                    |   (React, etc.)   |
+                    +---------+---------+
+                              |
+                              |  (GraphQL Request)
+                              v
+                    +-------------------+
+                    |   API Gateway     |
+                    | (NestJS, GraphQL) |
+                    +---------+---------+
+                              |
+             +----------------+----------------+
+             |                |                |
+             v                v                v
    +----------------+ +----------------+ +----------------+
    | eBay Service   | | Amazon Service*| |   ...          |
    | (NestJS, REST) | | (NestJS, REST) | | (Future svc)   |
@@ -38,7 +38,7 @@ Enterprise-grade, scalable microservices architecture for integrating major mark
            v                  v                  v
    +----------------+ +----------------+ +----------------+
    | Postgres DB    | | Postgres DB    | | Postgres DB    |
-   | (Schema: ebay) | | (Schema: amzn)| | (Schema: ...)  |
+   | (Schema: ebay) | | (Schema: amzn)|  | (Schema: ...)  |
    +----------------+ +----------------+ +----------------+
 
 Other infrastructure:
@@ -79,9 +79,7 @@ yarn install
 ```
 
 ### 3. Set Up Environment Variables
-- Copy the example `.env` files for each service to `.env`:
-  - `cp apps/api-gateway/.env.example apps/api-gateway/.env`
-  - `cp apps/ebay-service/.env.example apps/ebay-service/.env`
+- Copy the example `.env` files for each service to `.env`. See the [Example .env Files](#example-env-files) section below.
 - Edit values as needed for your local setup.
 
 #### Example .env Files
@@ -168,7 +166,7 @@ apps/
   ebay-service/        # eBay microservice (NestJS, REST, TypeORM, Kafka, Prometheus, tracing)
   ebay-service-e2e/    # e2e test project for eBay service (not a deployable service)
 libs/
-  common/              # Shared types, error handling, utils
+  common/              # Shared types, error handling, and utils
   auth/                # Auth logic (JWT)
   observability/       # Logging, tracing, metrics
   messaging/           # KafkaJS-based messaging utilities
