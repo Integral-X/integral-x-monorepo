@@ -16,27 +16,19 @@ Enterprise-grade, scalable microservices architecture for integrating major mark
 
 ```
                                  +-------------------+
-                                 |   Next.js Frontend|
-                                 +---------+---------+
-                                           |
-                                           v
-                                 +-------------------+
                                  |   API Gateway     |
                                  | (NestJS, GraphQL) |
                                  +---------+---------+
                                            |
-         -------------------------------------------------------------------------
-         |                       |                       |                       |
-+--------v--------+     +--------v--------+     +--------v--------+     +--------v--------+
-|   eBay Service  |     |  Amazon Service |     | Walmart Service |     |  ... (extensible)|
-| (NestJS, REST)  |     | (NestJS, REST)  |     | (NestJS, REST)  |     |                 |
-+--------+--------+     +--------+--------+     +--------+--------+     +--------+--------+
-         |                       |                       |                       |
-         |                       |                       |                       |
-+--------v--------+     +--------v--------+     +--------v--------+     +--------v--------+
-|  Postgres DB    |     |  Postgres DB    |     |  Postgres DB    |     |  Postgres DB    |
-| (Schema: eBay)  |     | (Schema: Ama)   |     | (Schema: Wal)   |     | (Schema: ...)  |
-+-----------------+     +-----------------+     +-----------------+     +-----------------+
++--------v--------+
+|   eBay Service  |
+| (NestJS, REST)  |
++--------+--------+
+         |
++--------v--------+
+|  Postgres DB    |
+| (Schema: eBay)  |
++-----------------+
 
          <------------------------ Kafka (Broker) ------------------------>
          <------------------------ Zookeeper ----------------------------->
@@ -101,7 +93,9 @@ yarn install
 ```
 NODE_ENV=development
 PORT=4000
-JWT_SECRET=changeme
+# WARNING: Do not use this default secret in production.
+# Generate a strong, unique secret for each environment.
+JWT_SECRET=<your-strong-secret>
 OTEL_SERVICE_NAME=api-gateway
 JAEGER_HOST=localhost
 JAEGER_PORT=6832
@@ -121,30 +115,6 @@ KAFKA_BROKERS=localhost:9092
 KAFKA_CLIENT_ID=ebay-service
 ```
 
-**Amazon Service (`apps/amazon-service/.env`)**
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASS=postgres
-DB_NAME=postgres
-DB_SCHEMA=amazon
-KAFKA_BROKERS=localhost:9092
-KAFKA_CLIENT_ID=amazon-service
-```
-
-**Walmart Service (`apps/walmart-service/.env`)**
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASS=postgres
-DB_NAME=postgres
-DB_SCHEMA=walmart
-KAFKA_BROKERS=localhost:9092
-KAFKA_CLIENT_ID=walmart-service
-```
-
 ### 4. Start All Services Locally
 ```bash
 cd docker
@@ -152,8 +122,7 @@ cd docker
 docker-compose up --build
 ```
 - The API Gateway will be available at `http://localhost:4000`
-- Microservices at `http://localhost:4100`, `:4200`, `:4300`
-- Frontend at `http://localhost:3000` (scaffolded, not yet implemented)
+- Microservices at `http://localhost:4100`
 
 ### 5. Run Tests
 ```bash
@@ -182,7 +151,6 @@ docker-compose down
 | Language & Runtime| Node.js, TypeScript               | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability. |
 | API Gateway       | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation. |
 | Microservices     | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction. |
-| Frontend          | Next.js, React (scaffolded only)   | Modern, production-ready React framework for future extensibility. |
 | Messaging         | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design. |
 | Database          | Postgres (schema-per-service)       | Proven, open-source RDBMS; schema-per-service for isolation and scalability. |
 | Auth              | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies. |
@@ -201,9 +169,6 @@ docker-compose down
 apps/
   api-gateway/         # GraphQL Gateway
   ebay-service/        # eBay microservice (REST)
-  amazon-service/      # Amazon microservice (REST)
-  walmart-service/     # Walmart microservice (REST)
-  frontend/            # Next.js frontend (optional, scaffolded)
 libs/
   common/              # Shared types, error handling, utils
   auth/                # Auth logic (JWT)

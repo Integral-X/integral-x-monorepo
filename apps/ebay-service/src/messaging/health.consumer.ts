@@ -1,8 +1,8 @@
-import { createConsumer } from '../../../../libs/messaging/src/kafka';
-import { logger } from '../../../../libs/observability/src/logger';
+import { KafkaService } from '@integral-x/messaging';
+import { logger } from '@integral-x/observability';
 
-export async function startHealthConsumer() {
-  const consumer = createConsumer('ebay-health-group');
+export async function startHealthConsumer(kafkaService: KafkaService) {
+  const consumer = kafkaService.createConsumer('ebay-health-group');
   await consumer.connect();
   await consumer.subscribe({ topic: 'health-checks', fromBeginning: true });
   await consumer.run({
