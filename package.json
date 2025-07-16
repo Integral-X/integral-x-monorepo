@@ -14,12 +14,15 @@
     "format": "nx format:write"
   },
   "devDependencies": {
-    "@nrwl/nx": "latest",
     "@nrwl/node": "latest",
+    "@nrwl/nx": "latest",
     "@nrwl/workspace": "latest",
+    "@types/express-rate-limit": "^6.0.2",
+    "eslint": "^9.31.0",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
     "typescript": "^5.0.0",
-    "eslint": "^8.0.0",
-    "prettier": "^3.0.0"
+    "typescript-eslint": "^8.37.0"
   },
   "engines": {
     "node": ">=18.0.0"

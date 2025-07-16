@@ -1,0 +1,23 @@
+name: Main Checks
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  main-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint all projects
+        run: npx nx run-many --target=lint --all
+      - name: Test all projects
+        run: npx nx run-many --target=test --all
+      - name: Build all projects
+        run: npx nx run-many --target=build --all 

@@ -1,15 +1,46 @@
 import request from 'supertest';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Module } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { AppModule } from '../src/app.module';
+import { HealthModule } from '../src/modules/health.module';
+import { KafkaService } from '@integral-x/messaging';
+import { ConfigModule } from '@nestjs/config';
+
+jest.mock('@nestjs/typeorm', () => ({
+  TypeOrmModule: {
+    forRootAsync: jest.fn(() => ({})),
+    forRoot: jest.fn(() => ({})),
+  },
+}));
+
+jest.mock('@integral-x/messaging', () => ({
+  KafkaService: jest.fn().mockImplementation(() => ({
+    createProducer: jest.fn().mockReturnValue({
+      connect: jest.fn(),
+      send: jest.fn(),
+      disconnect: jest.fn(),
+    }),
+    createConsumer: jest.fn().mockReturnValue({
+      connect: jest.fn(),
+      subscribe: jest.fn(),
+      run: jest.fn(),
+      disconnect: jest.fn(),
+    }),
+  })),
+}));
+
+@Module({
+  imports: [HealthModule, ConfigModule.forRoot({ isGlobal: true })],
+})
+class TestAppModule {}
 
 describe('Health Check (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+      imports: [TestAppModule],
+    })
+    .compile();
     app = moduleFixture.createNestApplication();
     await app.init();
   });
@@ -24,4 +55,5 @@ describe('Health Check (e2e)', () => {
   afterAll(async () => {
     await app.close();
   });
-}); 
+});
+ 

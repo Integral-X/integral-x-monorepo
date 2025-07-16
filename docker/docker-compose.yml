@@ -30,8 +30,6 @@ services:
       - ../apps/api-gateway/.env
     depends_on:
       - ebay-service
-      - amazon-service
-      - walmart-service
       - kafka
       - postgres
   ebay-service:
@@ -43,29 +41,5 @@ services:
     depends_on:
       - kafka
       - postgres
-  amazon-service:
-    build: ../apps/amazon-service
-    ports:
-      - '4200:4200'
-    env_file:
-      - ../apps/amazon-service/.env
-    depends_on:
-      - kafka
-      - postgres
-  walmart-service:
-    build: ../apps/walmart-service
-    ports:
-      - '4300:4300'
-    env_file:
-      - ../apps/walmart-service/.env
-    depends_on:
-      - kafka
-      - postgres
-  frontend:
-    build: ../apps/frontend
-    ports:
-      - '3000:3000'
-    env_file:
-      - ../apps/frontend/.env
 volumes:
   pgdata: 

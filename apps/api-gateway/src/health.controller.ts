@@ -1,11 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { sendHealthCheck } from './messaging/health.producer';
+import { HealthProducer } from './messaging/health.producer';
 
 @Controller('health')
 export class HealthController {
+  constructor(private readonly healthProducer: HealthProducer) {}
+
   @Get()
   async getHealth() {
-    await sendHealthCheck('ok');
+    await this.healthProducer.sendHealthCheck('ok');
     return { status: 'ok' };
   }
 } 
