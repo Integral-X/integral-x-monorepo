@@ -1,5 +1,8 @@
-import { Module } from '@nestjs/common';
-import { KafkaService } from './kafka.service';
+/*
+ * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
+ */
+import { Module } from "@nestjs/common";
+import { KafkaService } from "./kafka.service";
 
 class MockKafkaService {
   createProducer() {

@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@integral-x/messaging": ["../../libs/messaging/src/index.ts"],
+      "@integral-x/common": ["../../libs/common/src/index.ts"],
+      "@integral-x/observability": ["../../libs/observability/src/index.ts"],
+      "@integral-x/auth": ["../../libs/auth/src/index.ts"],
+      "ebay-service/*": ["../../apps/ebay-service/src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+} 

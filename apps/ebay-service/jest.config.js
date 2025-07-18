@@ -1,16 +1,17 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  rootDir: '.',
-  testMatch: ['**/__tests__/**/*.ts'],
+  preset: "ts-jest",
+  testEnvironment: "node",
+  rootDir: ".",
+  transform: {
+    "^.+\.ts$": ["ts-jest", { tsConfig: "<rootDir>/tsconfig.json" }],
+  },
+  testMatch: ["**/__tests__/**/*.ts"],
   moduleNameMapper: {
-    "@integral-x/messaging": "<rootDir>/../../libs/messaging/src",
-    "@integral-x/observability": "<rootDir>/../../libs/observability/src",
-    "@integral-x/auth": "<rootDir>/../../libs/auth/src",
-    "@integral-x/common": "<rootDir>/../../libs/common/src",
+    redis: "<rootDir>/__mocks__/redis.ts",
+    "class-validator": "<rootDir>/__mocks__/class-validator.ts",
   },
   collectCoverage: true,
-  coverageDirectory: './coverage',
-  coverageReporters: ['text', 'lcov'],
-  setupFilesAfterEnv: ['./jest-setup.ts'],
+  coverageDirectory: "./coverage",
+  coverageReporters: ["text", "lcov"],
+  setupFiles: ["./jest-setup.ts"],
 };

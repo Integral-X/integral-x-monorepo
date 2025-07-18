@@ -8,4 +8,4 @@ data:
   NODE_ENV: production
   OTEL_SERVICE_NAME: api-gateway
   JAEGER_HOST: jaeger
-  JAEGER_PORT: "6832" 
+  JAEGER_PORT: "6832"

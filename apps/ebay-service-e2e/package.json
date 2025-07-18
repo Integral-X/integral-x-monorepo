@@ -1,0 +1,17 @@
+{
+  "name": "ebay-service-e2e",
+  "version": "1.0.0",
+  "main": "src/ebay-service/health.e2e-spec.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "jest": "^30.0.4",
+    "supertest": "^7.1.3",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.0.0"
+  }
+}
