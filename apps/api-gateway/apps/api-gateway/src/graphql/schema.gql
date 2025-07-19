@@ -5,6 +5,8 @@
 type Query {
   health: String!
 
-  """Placeholder for marketplace integration"""
+  """
+  Placeholder for marketplace integration
+  """
   marketplaceStatus: String!
 }

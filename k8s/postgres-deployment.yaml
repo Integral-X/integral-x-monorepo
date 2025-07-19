@@ -28,4 +28,4 @@ spec:
       volumes:
         - name: pgdata
           persistentVolumeClaim:
-            claimName: pgdata-pvc 
+            claimName: pgdata-pvc
