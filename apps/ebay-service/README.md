@@ -8,7 +8,6 @@ This is the eBay microservice for the Integral-X Marketplace Integration Monorep
 - Postgres (schema-per-microservice)
 - Redis caching
 - Prometheus metrics and OpenTelemetry tracing
-- Enterprise folder structure (DDD-inspired)
 
 ## Structure
 
