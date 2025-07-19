@@ -27,7 +27,7 @@ export class ProductEntity implements Omit<Product, "source"> {
   /**
    * The price of the product.
    */
-  @Column("decimal")
+  @Column("decimal", { precision: 10, scale: 2 })
   price!: number;
 
   /**
