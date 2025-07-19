@@ -15,5 +15,5 @@ export const getTypeOrmConfig = (
   database: configService.get<string>("DB_NAME"),
   schema: configService.get<string>("DB_SCHEMA"),
   entities: [__dirname + "/../**/*.entity{.ts,.js}"],
-  synchronize: true, // Set to false in production
+  synchronize: configService.get<string>("NODE_ENV") === "development", // Enable only in development
 });
