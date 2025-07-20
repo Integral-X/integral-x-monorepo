@@ -2,7 +2,7 @@
  * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
  */
 import { Module } from "@nestjs/common";
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { ConfigModule } from "@nestjs/config";
 import * as Joi from "joi";
 import { KafkaService } from "./kafka.service";
 

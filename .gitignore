@@ -24,6 +24,9 @@ Dockerfile*
 # Nx/Monorepo
 .nx/
 
+# npm lock file  (to keep only yarn lock)
+package-lock.json
+
 # IDEs and editors
 .vscode/
 .idea/

@@ -6,7 +6,6 @@ import { AppModule } from "./app.module";
 import { logger, logInfo } from "../../../libs/observability/src/logger";
 import { getMetrics } from "../../../libs/observability/src/metrics";
 import { initTracing } from "../../../libs/observability/src/tracing";
-import * as express from "express";
 import { AllExceptionsFilter } from "../../../libs/common/src/http-exception.filter";
 import { rateLimiter } from "./rate-limit";
 import { v4 as uuidv4 } from "uuid";

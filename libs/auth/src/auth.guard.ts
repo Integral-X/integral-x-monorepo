@@ -23,7 +23,7 @@ export class JwtAuthGuard implements CanActivate {
       const payload = this.jwtService.verify(token);
       req.user = payload;
       return true;
-    } catch (_error) {
+    } catch {
       throw new UnauthorizedException("Invalid or expired token");
     }
   }

@@ -65,7 +65,7 @@ Legend:
 ### Prerequisites
 
 - Node.js 20+
-- Yarn (preferred; npm is not officially supported/tested)
+- Yarn (preferred)
 - Docker & Docker Compose
 
 ### 1. Clone the Repository
@@ -146,8 +146,7 @@ npx nx run-many --target=test --all
 ### 6. Lint and Format
 
 ```bash
-npx nx run-many --target=lint --all
-npx nx format:write
+yarn spotless
 ```
 
 ### 7. Stopping Services
@@ -161,22 +160,22 @@ docker-compose down
 
 ## Tech Stack & Rationale
 
-| Component           | Technology/Tooling                 | Why This Choice                                                                                                                                        |
-| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Language & Runtime  | Node.js, TypeScript                | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability.                                                     |
-| API Gateway         | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation.                                                             |
-| Microservices       | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction.                                                             |
-| Messaging           | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design.                                                        |
-| Database            | Postgres (schema-per-service)      | Proven, open-source RDBMS; schema-per-service for isolation and scalability.                                                                           |
-| Database Migrations | TypeORM Migrations                 | Essential for managing schema changes and ensuring database consistency across environments.                                                           |
-| Auth                | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies.                                                                            |
-| Observability       | Winston, Prometheus, OpenTelemetry | Comprehensive logging, metrics, and distributed tracing for monitoring and troubleshooting.                                                            |
-| Tracing             | Jaeger/Zipkin                      | Distributed tracing for visibility into request flows and performance bottlenecks.                                                                     |
-| Containerization    | Docker, Docker Compose             | Consistent, reproducible local development and deployment environments.                                                                                |
-| Orchestration       | Kubernetes                         | Automated deployment, scaling, and management of containers in production.                                                                             |
-| CI/CD               | GitHub Actions                     | Automated linting, testing, building, and deployment for the monorepo.                                                                                 |
-| Testing             | Jest, Supertest                    | Reliable unit and end-to-end testing for code quality and confidence.                                                                                  |
-|                     |                                    | **Improvement Note:** Dedicated e2e tests are now in their own package for better separation and scalability.                                           |
+| Component           | Technology/Tooling                 | Why This Choice                                                                                               |
+| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Language & Runtime  | Node.js, TypeScript                | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability.            |
+| API Gateway         | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation.                    |
+| Microservices       | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction.                    |
+| Messaging           | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design.               |
+| Database            | Postgres (schema-per-service)      | Proven, open-source RDBMS; schema-per-service for isolation and scalability.                                  |
+| Database Migrations | TypeORM Migrations                 | Essential for managing schema changes and ensuring database consistency across environments.                  |
+| Auth                | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies.                                   |
+| Observability       | Winston, Prometheus, OpenTelemetry | Comprehensive logging, metrics, and distributed tracing for monitoring and troubleshooting.                   |
+| Tracing             | Jaeger/Zipkin                      | Distributed tracing for visibility into request flows and performance bottlenecks.                            |
+| Containerization    | Docker, Docker Compose             | Consistent, reproducible local development and deployment environments.                                       |
+| Orchestration       | Kubernetes                         | Automated deployment, scaling, and management of containers in production.                                    |
+| CI/CD               | GitHub Actions                     | Automated linting, testing, building, and deployment for the monorepo.                                        |
+| Testing             | Jest, Supertest                    | Reliable unit and end-to-end testing for code quality and confidence.                                         |
+|                     |                                    | **Improvement Note:** Dedicated e2e tests are now in their own package for better separation and scalability. |
 
 ---
 
