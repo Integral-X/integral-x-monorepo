@@ -1,6 +1,5 @@
-#!/usr/bin/env node
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const YEAR = new Date().getFullYear();
 const LICENSE_HEADER = `/*\n * Copyright (c) ${YEAR} Integral-X or Integral-X affiliate company. All rights reserved.\n */\n`;

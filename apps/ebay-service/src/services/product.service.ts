@@ -7,7 +7,6 @@ import { ProductCacheService } from "../cache/product.cache.service";
 import { EbayApiAdapter } from "../external/ebay-api.adapter";
 import { Product } from "../types/product.types";
 import { ProductMapper } from "../mappers/product.mapper";
-import { ProductEntity } from "../entities/product.entity";
 
 @Injectable()
 export class ProductService {
