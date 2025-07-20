@@ -65,7 +65,7 @@ Legend:
 ### Prerequisites
 
 - Node.js 20+
-- Yarn (preferred; npm is not officially supported/tested)
+- Yarn (preferred)
 - Docker & Docker Compose
 
 ### 1. Clone the Repository
@@ -146,8 +146,7 @@ npx nx run-many --target=test --all
 ### 6. Lint and Format
 
 ```bash
-npx nx run-many --target=lint --all
-npx nx format:write
+npm run spotless
 ```
 
 ### 7. Stopping Services
