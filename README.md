@@ -63,28 +63,33 @@ Legend:
 ## Local Development & Running Locally
 
 ### Prerequisites
+
 - Node.js 20+
 - Yarn (preferred; npm is not officially supported/tested)
 - Docker & Docker Compose
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/integral-x/integral-x-monorepo.git
 cd integral-x-monorepo
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 yarn install
 ```
 
 ### 3. Set Up Environment Variables
+
 - Copy the example `.env` files for each service to `.env`. See the [Example .env Files](#example-env-files) section below.
 - Edit values as needed for your local setup.
 
 #### Example .env Files
 
 **API Gateway (`apps/api-gateway/.env`)**
+
 ```
 NODE_ENV=development
 PORT=4000
@@ -99,6 +104,7 @@ KAFKA_CLIENT_ID=api-gateway
 ```
 
 **eBay Service (`apps/ebay-service/.env`)**
+
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -111,27 +117,41 @@ KAFKA_CLIENT_ID=ebay-service
 ```
 
 ### 4. Start All Services Locally
+
 ```bash
 cd docker
 # Build and start all services, Kafka, and Postgres
 docker-compose up --build
 ```
+
 - The API Gateway will be available at `http://localhost:4000`
 - eBay microservice at `http://localhost:4100`
 
 ### 5. Run Tests
+
 ```bash
 npx nx run-many --target=test --all
 ```
+
 - This runs all tests for all apps and libraries in the monorepo.
+- **End-to-end (e2e) tests for eBay Service are now in a dedicated package:**
+  - `apps/ebay-service-e2e/`
+  - Run with:
+    ```bash
+    cd apps/ebay-service-e2e
+    npm install
+    npm test
+    ```
 
 ### 6. Lint and Format
+
 ```bash
 npx nx run-many --target=lint --all
 npx nx format:write
 ```
 
 ### 7. Stopping Services
+
 ```bash
 # In the docker directory
 docker-compose down
@@ -141,20 +161,22 @@ docker-compose down
 
 ## Tech Stack & Rationale
 
-| Component         | Technology/Tooling                | Why This Choice |
-|-------------------|-----------------------------------|-----------------|
-| Language & Runtime| Node.js, TypeScript               | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability. |
-| API Gateway       | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation. |
-| Microservices     | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction. |
-| Messaging         | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design. |
-| Database          | Postgres (schema-per-service)       | Proven, open-source RDBMS; schema-per-service for isolation and scalability. |
-| Auth              | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies. |
-| Observability     | Winston, Prometheus, OpenTelemetry | Comprehensive logging, metrics, and distributed tracing for monitoring and troubleshooting. |
-| Tracing           | Jaeger/Zipkin                      | Distributed tracing for visibility into request flows and performance bottlenecks. |
-| Containerization  | Docker, Docker Compose             | Consistent, reproducible local development and deployment environments. |
-| Orchestration     | Kubernetes                         | Automated deployment, scaling, and management of containers in production. |
-| CI/CD             | GitHub Actions                     | Automated linting, testing, building, and deployment for the monorepo. |
-| Testing           | Jest, Supertest                    | Reliable unit and end-to-end testing for code quality and confidence. |
+| Component           | Technology/Tooling                 | Why This Choice                                                                                                                                        |
+| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Language & Runtime  | Node.js, TypeScript                | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability.                                                     |
+| API Gateway         | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation.                                                             |
+| Microservices       | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction.                                                             |
+| Messaging           | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design.                                                        |
+| Database            | Postgres (schema-per-service)      | Proven, open-source RDBMS; schema-per-service for isolation and scalability.                                                                           |
+| Database Migrations | TypeORM Migrations                 | Essential for managing schema changes and ensuring database consistency across environments.                                                           |
+| Auth                | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies.                                                                            |
+| Observability       | Winston, Prometheus, OpenTelemetry | Comprehensive logging, metrics, and distributed tracing for monitoring and troubleshooting.                                                            |
+| Tracing             | Jaeger/Zipkin                      | Distributed tracing for visibility into request flows and performance bottlenecks.                                                                     |
+| Containerization    | Docker, Docker Compose             | Consistent, reproducible local development and deployment environments.                                                                                |
+| Orchestration       | Kubernetes                         | Automated deployment, scaling, and management of containers in production.                                                                             |
+| CI/CD               | GitHub Actions                     | Automated linting, testing, building, and deployment for the monorepo.                                                                                 |
+| Testing             | Jest, Supertest                    | Reliable unit and end-to-end testing for code quality and confidence.                                                                                  |
+|                     |                                    | **Improvement Note:** Dedicated e2e tests are now in their own package for better separation and scalability.                                           |
 
 ---
 
@@ -164,7 +186,7 @@ docker-compose down
 apps/
   api-gateway/         # GraphQL Gateway (NestJS, Apollo Federation, JWT, Kafka, Prometheus, tracing)
   ebay-service/        # eBay microservice (NestJS, REST, TypeORM, Kafka, Prometheus, tracing)
-  ebay-service-e2e/    # e2e test project for eBay service (not a deployable service)
+  ebay-service-e2e/    # e2e test project for eBay service (dedicated package, not a deployable service)
 libs/
   common/              # Shared types, error handling, and utils
   auth/                # Auth logic (JWT)
@@ -174,6 +196,7 @@ docker/                # Docker Compose, Dockerfiles
 k8s/                   # Kubernetes manifests
 .github/
   workflows/           # CI/CD workflows
+tools/                 # Utility scripts (e.g., license header automation)
 ```
 
 ---
@@ -188,7 +211,8 @@ k8s/                   # Kubernetes manifests
 - **Observability:** Winston logging, Prometheus metrics, OpenTelemetry tracing, correlation IDs.
 - **Security:** JWT auth, rate limiting, centralized error handling, secrets via env/K8s.
 - **DevOps:** Docker Compose, Kubernetes, GitHub Actions CI/CD.
-- **Testing:** Jest, Supertest, e2e tests for health endpoints.
+- **Testing:** Jest, Supertest, dedicated e2e package for health endpoints and integration flows.
+- **Automation:** Spotless command for formatting, linting, and license header compliance.
 
 ---
 

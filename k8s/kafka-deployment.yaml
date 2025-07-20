@@ -41,4 +41,4 @@ spec:
             - name: KAFKA_ADVERTISED_HOST_NAME
               value: kafka
             - name: KAFKA_ZOOKEEPER_CONNECT
-              value: zookeeper:2181 
+              value: zookeeper:2181

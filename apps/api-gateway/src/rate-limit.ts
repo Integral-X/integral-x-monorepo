@@ -1,4 +1,7 @@
-import rateLimit from 'express-rate-limit';
+/*
+ * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
+ */
+import rateLimit from "express-rate-limit";
 // import RedisStore from 'rate-limit-redis'; // Uncomment for Redis integration
 
 export const rateLimiter = rateLimit({
@@ -6,9 +9,9 @@ export const rateLimiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
   message: {
     statusCode: 429,
-    message: 'Too many requests, please try again later.'
+    message: "Too many requests, please try again later.",
   },
   // store: new RedisStore({
   //   sendCommand: ... // Provide Redis client for distributed rate limiting
   // })
-}); 
+});
