@@ -146,7 +146,7 @@ npx nx run-many --target=test --all
 ### 6. Lint and Format
 
 ```bash
-npm run spotless
+yarn spotless
 ```
 
 ### 7. Stopping Services
