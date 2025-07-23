@@ -1,0 +1,67 @@
+version: "3.8"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    ports:
+      - "2181:2181"
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+  postgres:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.api-gateway
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./apps/api-gateway/.env
+    depends_on:
+      ebay-service:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  ebay-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ebay-service
+    ports:
+      - "4100:4100"
+    env_file:
+      - ./apps/ebay-service/.env
+    depends_on:
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+volumes:
+  pgdata:

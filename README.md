@@ -93,26 +93,24 @@ yarn install
 ```
 NODE_ENV=development
 PORT=4000
-# WARNING: Do not use this default secret in production.
-# Generate a strong, unique secret for each environment.
 JWT_SECRET=<your-strong-secret>
 OTEL_SERVICE_NAME=api-gateway
 JAEGER_HOST=localhost
 JAEGER_PORT=6832
-KAFKA_BROKERS=localhost:9092
+KAFKA_BROKERS=kafka:9092
 KAFKA_CLIENT_ID=api-gateway
 ```
 
 **eBay Service (`apps/ebay-service/.env`)**
 
 ```
-DB_HOST=localhost
+DB_HOST=postgres
 DB_PORT=5432
 DB_USER=postgres
 DB_PASS=postgres
 DB_NAME=postgres
-DB_SCHEMA=ebay
-KAFKA_BROKERS=localhost:9092
+DB_SCHEMA=public
+KAFKA_BROKERS=kafka:9092
 KAFKA_CLIENT_ID=ebay-service
 ```
 

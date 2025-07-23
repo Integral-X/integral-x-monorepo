@@ -21,6 +21,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "__test__/auth.guard.spec.ts"],
   "exclude": ["node_modules", "dist"]
 }

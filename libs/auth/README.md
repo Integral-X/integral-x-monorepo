@@ -6,9 +6,10 @@ This library provides authentication logic (JWT, guards, modules) for use across
 
 ```
 libs/auth/
+  __test__/
+    auth.guard.spec.ts    # Unit tests for the guard
   src/
     auth.guard.ts         # JWT Auth Guard for NestJS
-    auth.guard.spec.ts    # Unit tests for the guard
     auth.module.ts        # Auth module for NestJS
   package.json
   tsconfig.json
