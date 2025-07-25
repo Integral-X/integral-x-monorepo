@@ -37,3 +37,4 @@ package-lock.json
 
 # Ignore generated types and artifacts
 **/generated/
+.github/instructions/nx.instructions.md

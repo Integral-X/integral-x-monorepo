@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "npmScope": "integral-x",
-  "affected": {
-    "defaultBase": "main"
-  },
   "workspaceLayout": {
     "appsDir": "apps",
     "libsDir": "libs"
@@ -28,5 +24,6 @@
     "test": {
       "cache": true
     }
-  }
+  },
+  "defaultBase": "main"
 }
