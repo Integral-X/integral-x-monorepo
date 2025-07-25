@@ -10,10 +10,9 @@ export class EbayApiAdapter {
   private readonly ebayApiBaseUrl: string;
   private readonly ebayApiKey: string;
 
-  constructor(
-    private readonly configService: ConfigService,
-    private readonly logger: Logger = new Logger(EbayApiAdapter.name),
-  ) {
+  private readonly logger = new Logger(EbayApiAdapter.name);
+
+  constructor(private readonly configService: ConfigService) {
     this.ebayApiBaseUrl =
       this.configService.get<string>("EBAY_API_BASE_URL") ?? "";
     this.ebayApiKey = this.configService.get<string>("EBAY_API_KEY") ?? "";

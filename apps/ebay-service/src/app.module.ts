@@ -5,6 +5,8 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { HealthModule } from "./modules/health.module";
+import { ProductModule } from "./modules/product.module";
+import { MessagingModule } from "../../../libs/messaging/src/messaging.module";
 import { validationSchema } from "./config/validation";
 import { getTypeOrmConfig } from "./db/typeorm.config";
 
@@ -21,7 +23,9 @@ import { getTypeOrmConfig } from "./db/typeorm.config";
         getTypeOrmConfig(configService),
       inject: [ConfigService],
     }),
+    MessagingModule,
     HealthModule,
+    ProductModule,
   ],
 })
 export class AppModule {}

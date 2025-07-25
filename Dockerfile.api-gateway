@@ -1,12 +1,19 @@
 FROM node:20-alpine
 
+# Install curl for health checks
+RUN apk add --no-cache curl
+
 WORKDIR /
 
 COPY . .
 
 RUN yarn install --frozen-lockfile --production=false
 
-RUN yarn nx build api-gateway
+# Build using NestJS CLI directly
+WORKDIR /apps/api-gateway
+RUN npx nest build
+
+WORKDIR /
 
 EXPOSE 4000
 

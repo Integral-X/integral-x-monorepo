@@ -1,15 +1,22 @@
 FROM node:20-alpine
 
-WORKDIR /app
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+WORKDIR /
 
 COPY . .
 
 RUN yarn install --frozen-lockfile --production=false
 
-RUN yarn nx build ebay-service
+# Build using NestJS CLI directly
+WORKDIR /apps/ebay-service
+RUN npx nest build
+
+WORKDIR /
 
 EXPOSE 4100
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:4100/health || exit 1
 
-CMD ["node", "apps/ebay-servicedist/apps/ebay-service/src/main.js"]
+CMD ["node", "apps/ebay-service/dist/apps/ebay-service/src/main.js"]

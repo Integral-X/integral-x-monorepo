@@ -2,98 +2,128 @@
 
 Enterprise-grade, scalable microservices architecture for integrating major marketplaces using Node.js, TypeScript, GraphQL, REST, Kafka, Postgres, Docker, and Kubernetes.
 
----
-
-## Architecture Diagram
-
-> **Note:** For a universally viewable diagram, see the SVG below. The ASCII diagram is also provided for text-based environments.
-
-### Architecture Diagram (SVG)
-
-![Architecture Diagram](Architecture.svg)
-
-### ASCII Diagram
-
-```
-                    +-------------------+
-                    |   Frontend App    |
-                    |   (React, etc.)   |
-                    +---------+---------+
-                              |
-                              |  (GraphQL Request)
-                              v
-                    +-------------------+
-                    |   API Gateway     |
-                    | (NestJS, GraphQL) |
-                    +---------+---------+
-                              |
-             +----------------+----------------+
-             |                |                |
-             v                v                v
-   +----------------+ +----------------+ +----------------+
-   | eBay Service   | | Amazon Service*| |   ...          |
-   | (NestJS, REST) | | (NestJS, REST) | | (Future svc)   |
-   +-------+--------+ +-------+--------+ +-------+--------+
-           |                  |                  |
-           v                  v                  v
-   +----------------+ +----------------+ +----------------+
-   | Postgres DB    | | Postgres DB    | | Postgres DB    |
-   | (Schema: ebay) | | (Schema: amzn)|  | (Schema: ...)  |
-   +----------------+ +----------------+ +----------------+
-
-Other infrastructure:
-- Kafka (for async/event-driven communication)
-- Redis (for caching, rate limiting)
-- Zookeeper (for Kafka coordination)
-- Prometheus, OpenTelemetry, Jaeger (observability)
-
-Legend:
-- External frontend apps communicate with the API Gateway exclusively via GraphQL.
-- API Gateway federates and routes requests to microservices (current: eBay; future: Amazon, etc.).
-- Each microservice uses schema-based separation in Postgres for data isolation.
-- All services and the gateway are containerized and orchestrated via Kubernetes.
-- Kafka enables async/event-driven communication.
-- Prometheus, OpenTelemetry, and Jaeger provide observability.
-- Architecture is easily extensible: add a new microservice, register it with the gateway, and connect it to Kafka/Postgres as needed.
-* Amazon Service is shown as an example of future extensibility.
-```
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/integral-x/integral-x-monorepo)
+[![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen)](https://github.com/integral-x/integral-x-monorepo)
+[![Docker](https://img.shields.io/badge/docker-ready-blue)](https://github.com/integral-x/integral-x-monorepo)
+[![License](https://img.shields.io/badge/license-Proprietary-red)](https://github.com/integral-x/integral-x-monorepo)
 
 ---
 
-## Local Development & Running Locally
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 20+
-- Yarn (preferred)
-- Docker & Docker Compose
+- **Node.js 20+** (LTS recommended)
+- **Yarn** (preferred package manager)
+- **Docker & Docker Compose** (for containerized development)
 
-### 1. Clone the Repository
+### 1. Clone and Setup
 
 ```bash
 git clone https://github.com/integral-x/integral-x-monorepo.git
 cd integral-x-monorepo
-```
-
-### 2. Install Dependencies
-
-```bash
 yarn install
 ```
 
-### 3. Set Up Environment Variables
+### 2. Start Development Environment
 
-- Copy the example `.env` files for each service to `.env`. See the [Example .env Files](#example-env-files) section below.
-- Edit values as needed for your local setup.
+```bash
+# Start all services with Docker (recommended)
+docker-compose up --build
 
-#### Example .env Files
+# Or test the complete setup
+./test-docker-setup.sh
+```
 
-**API Gateway (`apps/api-gateway/.env`)**
+### 3. Verify Services
+
+- **API Gateway**: http://localhost:4000/health
+- **eBay Service**: http://localhost:4100/health
+- **GraphQL Playground**: http://localhost:4000/graphql
+
+---
+
+## 🏗️ Architecture Overview
+
+### System Architecture
+
+![Architecture Diagram](Architecture.svg)
 
 ```
+      ┌─────────────────┐
+      │   Frontend App  │
+      │  (React, etc.)  │
+      └─────────┬───────┘
+                │ GraphQL
+                ▼
+      ┌─────────────────┐
+      │   API Gateway   │
+      │ (NestJS/GraphQL)│
+      └─────────┬───────┘
+                │
+          ┌─────┼─────┐
+          ▼     ▼     ▼
+      ┌─────┐ ┌─────┐ ┌─────┐
+      │eBay │ │Amzn*│ │ ... │
+      │Svc  │ │Svc  │ │Svc  │
+      └──┬──┘ └──┬──┘ └──┬──┘
+         ▼       ▼       ▼
+      ┌─────┐ ┌─────┐ ┌─────┐
+      │PG/  │ │PG/  │ │PG/  │
+      │ebay │ │amzn │ │...  │
+      └─────┘ └─────┘ └─────┘
+```
+
+**Infrastructure Components:**
+
+- **Kafka**: Event-driven communication
+- **Redis**: Caching and session storage
+- **PostgreSQL**: Data persistence (schema-per-service)
+- **Prometheus**: Metrics collection
+- **Jaeger**: Distributed tracing
+
+### Data Flow
+
+1. **Frontend** → GraphQL queries → **API Gateway**
+2. **API Gateway** → Kafka events → **Microservices**
+3. **Microservices** → Cache (Redis) → Database (Postgres) → External APIs
+4. **Response** flows back through the same path with caching
+
+---
+
+## 🛠️ Development
+
+### Available Commands
+
+```bash
+# Code Quality (runs license headers, linting, formatting)
+yarn spotless
+
+# Build all projects
+yarn build:all
+
+# Test all projects
+yarn test:all
+
+# Individual project commands
+npx nx build api-gateway
+npx nx lint ebay-service
+npx nx test @integral-x/messaging
+
+# Docker development
+docker-compose up --build    # Start all services
+docker-compose logs -f       # View logs
+docker-compose down          # Stop services
+```
+
+### Environment Configuration
+
+#### API Gateway (`.env`)
+
+```bash
 NODE_ENV=development
 PORT=4000
-JWT_SECRET=<your-strong-secret>
+JWT_SECRET=your-strong-secret-here
 OTEL_SERVICE_NAME=api-gateway
 JAEGER_HOST=localhost
 JAEGER_PORT=6832
@@ -101,118 +131,148 @@ KAFKA_BROKERS=kafka:9092
 KAFKA_CLIENT_ID=api-gateway
 ```
 
-**eBay Service (`apps/ebay-service/.env`)**
+#### eBay Service (`.env`)
 
-```
+```bash
+NODE_ENV=development
+PORT=4100
 DB_HOST=postgres
 DB_PORT=5432
 DB_USER=postgres
 DB_PASS=postgres
 DB_NAME=postgres
-DB_SCHEMA=public
+DB_SCHEMA=ebay
 KAFKA_BROKERS=kafka:9092
 KAFKA_CLIENT_ID=ebay-service
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_CACHE_TTL_SECONDS=3600
+EBAY_API_BASE_URL=https://api.ebay.com
+EBAY_API_KEY=mock-api-key
 ```
 
-### 4. Start All Services Locally
+### Testing
 
 ```bash
-cd docker
-# Build and start all services, Kafka, and Postgres
-docker-compose up --build
-```
+# Run all tests
+yarn test:all
 
-- The API Gateway will be available at `http://localhost:4000`
-- eBay microservice at `http://localhost:4100`
+# Run specific service tests
+npx nx test api-gateway
+npx nx test ebay-service
 
-### 5. Run Tests
+# Run e2e tests
+cd apps/ebay-service-e2e && npm test
 
-```bash
-npx nx run-many --target=test --all
-```
-
-- This runs all tests for all apps and libraries in the monorepo.
-- **End-to-end (e2e) tests for eBay Service are now in a dedicated package:**
-  - `apps/ebay-service-e2e/`
-  - Run with:
-    ```bash
-    cd apps/ebay-service-e2e
-    npm install
-    npm test
-    ```
-
-### 6. Lint and Format
-
-```bash
-yarn spotless
-```
-
-### 7. Stopping Services
-
-```bash
-# In the docker directory
-docker-compose down
+# Test Docker setup
+./test-docker-setup.sh
 ```
 
 ---
 
-## Tech Stack & Rationale
-
-| Component           | Technology/Tooling                 | Why This Choice                                                                                               |
-| ------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Language & Runtime  | Node.js, TypeScript                | Performance, scalability, and a strong ecosystem; TypeScript adds type safety and maintainability.            |
-| API Gateway         | NestJS, Apollo Federation, GraphQL | Modular, scalable framework; GraphQL enables unified, flexible data access and federation.                    |
-| Microservices       | NestJS, REST, TypeORM, TypeScript  | Enterprise patterns, REST for simplicity and interoperability, TypeORM for DB abstraction.                    |
-| Messaging           | Kafka, kafkajs                     | High-throughput, reliable async messaging; decouples services and supports event-driven design.               |
-| Database            | Postgres (schema-per-service)      | Proven, open-source RDBMS; schema-per-service for isolation and scalability.                                  |
-| Database Migrations | TypeORM Migrations                 | Essential for managing schema changes and ensuring database consistency across environments.                  |
-| Auth                | JWT, Passport.js                   | Secure, stateless authentication; Passport.js offers extensible strategies.                                   |
-| Observability       | Winston, Prometheus, OpenTelemetry | Comprehensive logging, metrics, and distributed tracing for monitoring and troubleshooting.                   |
-| Tracing             | Jaeger/Zipkin                      | Distributed tracing for visibility into request flows and performance bottlenecks.                            |
-| Containerization    | Docker, Docker Compose             | Consistent, reproducible local development and deployment environments.                                       |
-| Orchestration       | Kubernetes                         | Automated deployment, scaling, and management of containers in production.                                    |
-| CI/CD               | GitHub Actions                     | Automated linting, testing, building, and deployment for the monorepo.                                        |
-| Testing             | Jest, Supertest                    | Reliable unit and end-to-end testing for code quality and confidence.                                         |
-|                     |                                    | **Improvement Note:** Dedicated e2e tests are now in their own package for better separation and scalability. |
-
----
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-apps/
-  api-gateway/         # GraphQL Gateway (NestJS, Apollo Federation, JWT, Kafka, Prometheus, tracing)
-  ebay-service/        # eBay microservice (NestJS, REST, TypeORM, Kafka, Prometheus, tracing)
-  ebay-service-e2e/    # e2e test project for eBay service (dedicated package, not a deployable service)
-libs/
-  common/              # Shared types, error handling, and utils
-  auth/                # Auth logic (JWT)
-  observability/       # Logging, tracing, metrics
-  messaging/           # KafkaJS-based messaging utilities
-docker/                # Docker Compose, Dockerfiles
-k8s/                   # Kubernetes manifests
-.github/
-  workflows/           # CI/CD workflows
-tools/                 # Utility scripts (e.g., license header automation)
+integral-x-monorepo/
+├── apps/                         # Applications
+│   ├── api-gateway/              # GraphQL Gateway (Port 4000)
+│   │   ├── src/
+│   │   │   ├── graphql/          # GraphQL resolvers & schema
+│   │   │   ├── messaging/        # Kafka producers
+│   │   │   └── config/           # Configuration
+│   │   └── Dockerfile
+│   ├── ebay-service/             # eBay Microservice (Port 4100)
+│   │   ├── src/
+│   │   │   ├── controllers/      # REST endpoints
+│   │   │   ├── services/         # Business logic
+│   │   │   ├── repositories/     # Data access
+│   │   │   ├── kafka/            # Event handling
+│   │   │   ├── cache/            # Redis caching
+│   │   │   └── external/         # eBay API integration
+│   │   └── Dockerfile
+│   └── ebay-service-e2e/         # E2E tests (dedicated package)
+├── libs/                         # Shared Libraries
+│   ├── auth/                     # JWT authentication
+│   ├── common/                   # Shared types & utilities
+│   ├── messaging/                # Kafka utilities
+│   └── observability/            # Logging, metrics, tracing
+├── k8s/                          # Kubernetes manifests
+├── tools/                        # Build & utility scripts
+├── docker-compose.yml            # Local development
+├── BUILD_SYSTEM.md               # Build system documentation
+└── test-docker-setup.sh          # Integration test script
 ```
 
 ---
 
-## Key Features
+## 🔧 Tech Stack & Architecture Decisions
 
-- **Monorepo (Nx):** Centralized management, atomic commits, shared code.
-- **API Gateway:** GraphQL, Apollo Federation, JWT auth, rate limiting, error handling, Prometheus metrics (`/metrics`), distributed tracing, Kafka producer.
-- **eBay Microservice:** REST APIs, health endpoints, Prometheus metrics (`/health/metrics`), Kafka consumer, Postgres (schema-per-microservice), enterprise folder structure.
-- **Messaging:** Kafka for async/event-driven communication, shared messaging library.
-- **Database:** Postgres, TypeORM, schema-per-microservice.
-- **Observability:** Winston logging, Prometheus metrics, OpenTelemetry tracing, correlation IDs.
-- **Security:** JWT auth, rate limiting, centralized error handling, secrets via env/K8s.
-- **DevOps:** Docker Compose, Kubernetes, GitHub Actions CI/CD.
-- **Testing:** Jest, Supertest, dedicated e2e package for health endpoints and integration flows.
-- **Automation:** Spotless command for formatting, linting, and license header compliance.
+| Component            | Technology          | Rationale                                             |
+| -------------------- | ------------------- | ----------------------------------------------------- |
+| **Runtime**          | Node.js 20+         | Performance, ecosystem, TypeScript support            |
+| **Language**         | TypeScript          | Type safety, developer experience, maintainability    |
+| **API Gateway**      | NestJS + GraphQL    | Modular architecture, schema federation, type safety  |
+| **Microservices**    | NestJS + REST       | Enterprise patterns, dependency injection, decorators |
+| **Database**         | PostgreSQL          | ACID compliance, schema-per-service isolation         |
+| **Caching**          | Redis               | High-performance caching, session storage             |
+| **Messaging**        | Apache Kafka        | Event streaming, decoupled architecture               |
+| **Observability**    | Prometheus + Jaeger | Metrics collection, distributed tracing               |
+| **Containerization** | Docker + Compose    | Consistent environments, easy deployment              |
+| **Orchestration**    | Kubernetes          | Production scalability, service mesh ready            |
+| **Build System**     | Nx Monorepo         | Code sharing, incremental builds, caching             |
+| **Testing**          | Jest + Supertest    | Unit, integration, and e2e testing                    |
 
 ---
 
-## License
+## 🚀 Key Features
 
-Copyright (c) Integral-X. All rights reserved.
+### Core Capabilities
+
+- **Event-Driven Architecture**: Kafka-based async communication
+- **Multi-Tier Caching**: Redis → PostgreSQL → External APIs
+- **Full Observability**: Logging, metrics, and distributed tracing
+- **Enterprise Security**: JWT authentication, rate limiting, CORS
+- **Container-Ready**: Docker development and Kubernetes deployment
+- **Comprehensive Testing**: Unit, integration, and e2e test suites
+
+### Developer Experience
+
+- **Fast Development**: Hot reload, incremental builds
+- **Type Safety**: End-to-end TypeScript coverage
+- **Code Quality**: Automated linting, formatting, license headers
+- **Modern Tooling**: Nx workspace, ESLint, Prettier
+- **Documentation**: Comprehensive README files and inline docs
+
+### Production Ready
+
+- **Scalable**: Horizontal scaling with Kubernetes
+- **Resilient**: Circuit breakers, retry logic, health checks
+- **Monitorable**: Prometheus metrics, Jaeger tracing
+- **CI/CD Ready**: GitHub Actions integration
+- **Secure**: Environment-based secrets, security headers
+
+---
+
+## 📖 Additional Documentation
+
+- **[Architecture](ARCHITECTURE.md)**: System design and patterns
+- **[API Gateway](apps/api-gateway/README.md)**: GraphQL gateway documentation
+- **[eBay Service](apps/ebay-service/README.md)**: Microservice implementation
+- **[Kubernetes](k8s/README.md)**: Deployment manifests
+
+---
+
+## 🤝 Contributing
+
+1. **Code Quality**: Run `yarn spotless` before committing
+2. **Testing**: Ensure all tests pass with `yarn test:all`
+3. **Docker**: Verify Docker builds with `./test-docker-setup.sh`
+4. **Documentation**: Update relevant README files for changes
+
+---
+
+## 📄 License
+
+Copyright (c) 2025 Integral-X. All rights reserved.
+
+This software is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited.

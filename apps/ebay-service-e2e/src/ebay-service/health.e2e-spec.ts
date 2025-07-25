@@ -5,7 +5,7 @@ import request from "supertest";
 import { INestApplication, Module } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { HealthModule } from "ebay-service/modules/health.module";
-import { KafkaService } from "@integral-x/messaging";
+
 import { ConfigModule } from "@nestjs/config";
 
 jest.mock("@nestjs/typeorm", () => ({

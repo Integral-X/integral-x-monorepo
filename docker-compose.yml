@@ -4,6 +4,9 @@ services:
     image: confluentinc/cp-zookeeper:7.6.1
     ports:
       - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
   kafka:
     image: confluentinc/cp-kafka:7.6.1
     ports:
@@ -22,8 +25,16 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
   api-gateway:
     build:
       context: .
@@ -58,6 +69,8 @@ services:
         condition: service_started
       postgres:
         condition: service_started
+      redis:
+        condition: service_started
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4100/health"]
       interval: 30s
@@ -65,3 +78,4 @@ services:
       retries: 5
 volumes:
   pgdata:
+  redisdata:

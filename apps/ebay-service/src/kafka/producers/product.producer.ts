@@ -11,10 +11,9 @@ export class ProductProducer implements OnModuleInit {
   private readonly kafka: Kafka;
   private readonly producer: Producer;
 
-  constructor(
-    private readonly configService: ConfigService,
-    private readonly logger: Logger = new Logger(ProductProducer.name),
-  ) {
+  private readonly logger = new Logger(ProductProducer.name);
+
+  constructor(private readonly configService: ConfigService) {
     this.kafka = new Kafka({
       clientId: this.configService.get<string>("KAFKA_CLIENT_ID"),
       brokers: (this.configService.get<string>("KAFKA_BROKERS") ?? "").split(
