@@ -3,7 +3,6 @@ name: Performance Tests
 on:
   schedule:
     - cron: '0 2 * * *' # Run daily at 2 AM UTC
-  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -33,9 +32,6 @@ jobs:
       
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      
-      - name: Build all projects
-        run: npx nx run-many --target=build --all
       
       - name: Start services with Docker Compose
         run: |

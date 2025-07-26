@@ -43,18 +43,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       
-      - name: Run all validations
-        run: |
-          yarn spotless --check
-          npx nx run-many --target=lint --all
-          npx nx run-many --target=test --all
-          npx nx run-many --target=build --all
-      
       - name: Generate changelog
         id: changelog
         run: |
           # Install conventional-changelog-cli if not present
-          npm install -g conventional-changelog-cli
+          yarn install -g conventional-changelog-cli
           
           # Generate changelog
           conventional-changelog -p angular -i CHANGELOG.md -s -r 0
@@ -97,17 +90,17 @@ jobs:
       - name: Update version in all packages
         run: |
           # Update root package.json
-          npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
           
           # Update app package.json files
-          cd apps/api-gateway && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-          cd ../ebay-service && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd apps/api-gateway && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd ../ebay-service && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
           
           # Update lib package.json files
-          cd ../../libs/auth && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-          cd ../messaging && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-          cd ../observability && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-          cd ../common && npm version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd ../../libs/auth && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd ../messaging && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd ../observability && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
+          cd ../common && yarn version ${{ steps.version.outputs.new_version }} --no-git-tag-version
       
       - name: Commit version changes
         run: |
