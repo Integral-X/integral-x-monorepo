@@ -1,9 +1,18 @@
 {
-  "name": "auth",
+  "name": "@integral-x/auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/auth/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "libs/auth/dist",
+        "main": "libs/auth/src/index.ts",
+        "tsConfig": "libs/auth/tsconfig.json"
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

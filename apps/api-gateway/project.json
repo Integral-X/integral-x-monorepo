@@ -42,5 +42,11 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": [
+    "@integral-x/messaging",
+    "@integral-x/observability",
+    "@integral-x/common",
+    "@integral-x/auth"
+  ]
 }

@@ -11,7 +11,7 @@ RUN yarn install --frozen-lockfile --production=false
 
 # Build all dependencies and the service using Nx (disable daemon for Docker)
 ENV NX_DAEMON=false
-RUN npx nx run-many --target=build --projects=@integral-x/messaging,@integral-x/observability,@integral-x/common,auth,ebay-service
+RUN yarn build:ebay-service
 
 EXPOSE 4100
 
