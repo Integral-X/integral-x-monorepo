@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "0 6 * * 1" # Run weekly on Mondays at 6 AM UTC
 
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
 jobs:
   code-quality:
     runs-on: ubuntu-latest
@@ -56,16 +61,16 @@ jobs:
           echo "TypeScript compilation check completed" >> typescript-report.md
 
       - name: Run CodeQL Analysis (Free GitHub Security)
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
           queries: security-and-quality
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
 
       - name: Upload code quality reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: code-quality-reports
           path: |
@@ -130,7 +135,7 @@ jobs:
           fi
 
       - name: Upload security scan results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: security-scan-results
           path: |
@@ -167,7 +172,7 @@ jobs:
           output: "trivy-api-gateway.sarif"
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: |
@@ -204,7 +209,7 @@ jobs:
           echo "Full license details saved to license-details.json" >> license-report.md
 
       - name: Upload license compliance results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: license-compliance
           path: |

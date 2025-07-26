@@ -15,6 +15,10 @@ on:
           - staging
           - production
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME_EBAY: ${{ github.repository }}/ebay-service

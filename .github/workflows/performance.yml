@@ -12,6 +12,11 @@ on:
       - 'docker-compose.yml'
       - 'Dockerfile.*'
 
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+
 jobs:
   performance-test:
     runs-on: ubuntu-latest
@@ -126,7 +131,7 @@ jobs:
           fi
       
       - name: Upload performance results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: performance-results
           path: |
