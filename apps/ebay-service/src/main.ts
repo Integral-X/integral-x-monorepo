@@ -5,7 +5,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { startHealthConsumer } from "./messaging/health.consumer";
 import { ConfigService } from "@nestjs/config";
-import { KafkaService } from "../../../libs/messaging/src/kafka.service";
+import { KafkaService } from "@integral-x/messaging";
 import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {

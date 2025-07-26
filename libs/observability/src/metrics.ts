@@ -3,8 +3,11 @@
  */
 import client from "prom-client";
 
-const collectDefaultMetrics = client.collectDefaultMetrics;
-collectDefaultMetrics();
+// Only collect default metrics once to avoid registration conflicts
+if (!client.register.getSingleMetric("process_cpu_user_seconds_total")) {
+  const collectDefaultMetrics = client.collectDefaultMetrics;
+  collectDefaultMetrics();
+}
 
 export const requestCounter = new client.Counter({
   name: "http_requests_total",
