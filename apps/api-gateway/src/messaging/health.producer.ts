@@ -2,7 +2,7 @@
  * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
  */
 import { Injectable } from "@nestjs/common";
-import { KafkaService } from "../../../../libs/messaging/src";
+import { KafkaService } from "@integral-x/messaging";
 
 const topic = "health-checks";
 

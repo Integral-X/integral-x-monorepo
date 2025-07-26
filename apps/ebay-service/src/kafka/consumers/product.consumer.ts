@@ -7,10 +7,9 @@ import { ProductService } from "../../services/product.service";
 
 @Injectable()
 export class ProductConsumer {
-  constructor(
-    private readonly productService: ProductService,
-    private readonly logger: Logger = new Logger(ProductConsumer.name),
-  ) {}
+  private readonly logger = new Logger(ProductConsumer.name);
+
+  constructor(private readonly productService: ProductService) {}
 
   /**
    * Handles the 'ebay.product.get' topic.

@@ -8,7 +8,7 @@ import {
   HttpException,
   HttpStatus,
 } from "@nestjs/common";
-import { logger } from "../../observability/src/logger";
+import { logger } from "@integral-x/observability";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

@@ -9,7 +9,7 @@ export async function startHealthConsumer(kafkaService: KafkaService) {
   await consumer.connect();
   await consumer.subscribe({ topic: "health-checks", fromBeginning: true });
   await consumer.run({
-    eachMessage: async ({ message }) => {
+    eachMessage: async ({ message }: { message: any }) => {
       logger.info("Received health check", {
         value: message.value?.toString(),
       });

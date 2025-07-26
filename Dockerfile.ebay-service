@@ -1,0 +1,20 @@
+FROM node:20-alpine
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+WORKDIR /app
+
+COPY . .
+
+RUN yarn install --frozen-lockfile --production=false
+
+# Build all dependencies and the service using Nx (disable daemon for Docker)
+ENV NX_DAEMON=false
+RUN yarn build:ebay-service
+
+EXPOSE 4100
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:4100/health || exit 1
+
+CMD ["node", "apps/ebay-service/dist/src/main.js"]

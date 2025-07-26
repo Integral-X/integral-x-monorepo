@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
  */
-import { JwtAuthGuard } from "./auth.guard";
+import { JwtAuthGuard } from "../src/auth.guard";
 import { JwtService } from "@nestjs/jwt";
 import { createMock } from "@golevelup/ts-jest";
 import { ExecutionContext } from "@nestjs/common";

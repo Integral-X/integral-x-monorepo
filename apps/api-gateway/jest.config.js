@@ -15,7 +15,6 @@ module.exports = {
     "@integral-x/auth": "<rootDir>/../../libs/auth/src",
     "@integral-x/common": "<rootDir>/../../libs/common/src",
   },
-  collectCoverage: true,
   coverageDirectory: "./coverage",
   coverageReporters: ["text", "lcov"],
   setupFilesAfterEnv: ["./jest-setup.ts"],

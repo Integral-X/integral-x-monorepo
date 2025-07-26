@@ -3,10 +3,10 @@
  */
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { logger, logInfo } from "../../../libs/observability/src/logger";
-import { getMetrics } from "../../../libs/observability/src/metrics";
-import { initTracing } from "../../../libs/observability/src/tracing";
-import { AllExceptionsFilter } from "../../../libs/common/src/http-exception.filter";
+import { logger, logInfo } from "@integral-x/observability";
+import { getMetrics } from "@integral-x/observability";
+import { initTracing } from "@integral-x/observability";
+import { AllExceptionsFilter } from "@integral-x/common";
 import { rateLimiter } from "./rate-limit";
 import { v4 as uuidv4 } from "uuid";
 import { ConfigService } from "@nestjs/config";

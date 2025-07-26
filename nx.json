@@ -1,10 +1,30 @@
 {
-  "npmScope": "integral-x",
-  "affected": {
-    "defaultBase": "main"
-  },
+  "version": 2,
+  "useDaemonProcess": false,
   "workspaceLayout": {
     "appsDir": "apps",
     "libsDir": "libs"
-  }
+  },
+  "projects": {
+    "api-gateway": "apps/api-gateway",
+    "ebay-service": "apps/ebay-service",
+    "ebay-service-e2e": "apps/ebay-service-e2e",
+    "@integral-x/auth": "libs/auth",
+    "@integral-x/common": "libs/common",
+    "@integral-x/messaging": "libs/messaging",
+    "@integral-x/observability": "libs/observability"
+  },
+  "defaultProject": "api-gateway",
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    }
+  },
+  "defaultBase": "main"
 }

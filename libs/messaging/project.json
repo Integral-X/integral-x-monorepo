@@ -1,0 +1,25 @@
+{
+  "name": "@integral-x/messaging",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/messaging/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "libs/messaging/dist",
+        "main": "libs/messaging/src/index.ts",
+        "tsConfig": "libs/messaging/tsconfig.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/messaging/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -3,12 +3,10 @@
  */
 import { EbayApiAdapter } from "../../src/external/ebay-api.adapter";
 import { ConfigService } from "@nestjs/config";
-import { Logger } from "@nestjs/common";
 
 describe("EbayApiAdapter", () => {
   let adapter: EbayApiAdapter;
   let configService: jest.Mocked<ConfigService>;
-  let logger: jest.Mocked<Logger>;
 
   beforeEach(() => {
     configService = {
@@ -18,11 +16,7 @@ describe("EbayApiAdapter", () => {
         return "";
       }),
     } as unknown as jest.Mocked<ConfigService>;
-    logger = {
-      log: jest.fn(),
-      error: jest.fn(),
-    } as unknown as jest.Mocked<Logger>;
-    adapter = new EbayApiAdapter(configService, logger);
+    adapter = new EbayApiAdapter(configService);
   });
 
   it("should return a mock product for a valid ID", async () => {
