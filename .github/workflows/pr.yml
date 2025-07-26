@@ -31,20 +31,13 @@ jobs:
         run: yarn spotless --check
 
       - name: Lint all projects
-        run: npx nx run-many --target=lint --all
+        run: yarn lint:all
 
       - name: Test all projects (includes validation tests)
-        run: npx nx run-many --target=test --all
+        run: yarn test:all
 
       - name: Build all projects
-        run: npx nx run-many --target=build --all
-
-      - name: Run affected projects only (optimization)
-        run: |
-          echo "Running affected analysis..."
-          npx nx affected --target=lint --base=origin/main
-          npx nx affected --target=test --base=origin/main
-          npx nx affected --target=build --base=origin/main
+        run: yarn build:all
 
   docker-validation:
     runs-on: ubuntu-latest
