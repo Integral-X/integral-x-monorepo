@@ -1,10 +1,78 @@
 version: 2
 updates:
+  # Root workspace dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "integral-x/developers"
+    assignees:
+      - "integral-x/developers"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # Application dependencies
   - package-ecosystem: "npm"
     directory: "apps/api-gateway/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "integral-x/developers"
+    commit-message:
+      prefix: "chore(api-gateway)"
+
   - package-ecosystem: "npm"
     directory: "apps/ebay-service/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "integral-x/developers"
+    commit-message:
+      prefix: "chore(ebay-service)"
+
+  # Library dependencies
+  - package-ecosystem: "npm"
+    directory: "libs/auth/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(auth)"
+
+  - package-ecosystem: "npm"
+    directory: "libs/messaging/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(messaging)"
+
+  - package-ecosystem: "npm"
+    directory: "libs/observability/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(observability)"
+
+  - package-ecosystem: "npm"
+    directory: "libs/common/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(common)"
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(ci)"
