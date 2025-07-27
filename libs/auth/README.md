@@ -8,7 +8,7 @@ Centralized authentication utilities for the Integral-X monorepo, providing JWT-
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -44,7 +44,7 @@ export class ProtectedController {
 
 ---
 
-## 🏗️ Library Structure
+## Library Structure
 
 ### Directory Layout
 
@@ -64,13 +64,13 @@ libs/auth/
 
 ### Core Components
 
-- **🔐 JwtAuthGuard**: Request authentication guard
-- **📦 AuthModule**: NestJS module for authentication setup
-- **🧪 Test Suite**: Comprehensive unit tests
+- **JwtAuthGuard**: Request authentication guard
+- **AuthModule**: NestJS module for authentication setup
+- **Test Suite**: Comprehensive unit tests
 
 ---
 
-## 🔧 API Reference
+## API Reference
 
 ### JwtAuthGuard
 
@@ -123,7 +123,7 @@ export class AppModule {}
 
 ---
 
-## 🔐 Security Features
+## Security Features
 
 ### Token Validation
 
@@ -158,7 +158,7 @@ export class AppModule {}
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -198,7 +198,7 @@ describe("JwtAuthGuard", () => {
 
 ---
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Basic Protection
 
@@ -237,7 +237,7 @@ app.useGlobalGuards(new JwtAuthGuard(reflector));
 
 ---
 
-## 🔗 Integration
+## Integration
 
 ### With API Gateway
 
@@ -271,7 +271,7 @@ export class AppModule {}
 
 ---
 
-## 📚 Related Libraries
+## Related Libraries
 
 - **[Common Library](../common/README.md)**: Shared types and utilities
 - **[Observability Library](../observability/README.md)**: Logging and monitoring
@@ -279,7 +279,7 @@ export class AppModule {}
 
 ---
 
-## 🔧 Development
+## Development
 
 ### Building the Library
 
@@ -300,6 +300,6 @@ npx nx lint @integral-x/auth
 
 ---
 
-## 📄 License
+## License
 
 Copyright (c) 2025 Integral-X. All rights reserved.
