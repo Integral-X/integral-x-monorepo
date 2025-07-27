@@ -8,7 +8,7 @@ eBay marketplace integration microservice for the Integral-X platform. Provides 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Local Development
 
@@ -31,15 +31,15 @@ docker-compose up ebay-service
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Features
 
-- **🛍️ Product Retrieval**: Multi-tier caching strategy
-- **⚡ High Performance**: Redis → PostgreSQL → External API
-- **🔄 Event-Driven**: Kafka consumer/producer integration
-- **📊 Observability**: Metrics, logging, and health checks
-- **🔒 Data Validation**: Request/response validation with DTOs
+- **Product Retrieval**: Multi-tier caching strategy
+- **High Performance**: Redis → PostgreSQL → External API
+- **Event-Driven**: Kafka consumer/producer integration
+- **Observability**: Metrics, logging, and health checks
+- **Data Validation**: Request/response validation with DTOs
 
 ### Data Flow
 
@@ -87,7 +87,7 @@ src/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -126,7 +126,7 @@ CREATE TABLE ebay.products (
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Unit & Integration Tests
 
@@ -169,7 +169,7 @@ curl http://localhost:4100/health/metrics
 
 ---
 
-## 📊 Monitoring
+## Monitoring
 
 ### Health Checks
 
@@ -207,7 +207,7 @@ API Gateway → ebay.product.get → Product Service → ebay.product.persisted
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Docker
 
@@ -225,7 +225,7 @@ See `k8s/ebay-service-*.yaml` for deployment manifests.
 
 ---
 
-## 🔗 Related Services
+## Related Services
 
 - **[API Gateway](../api-gateway/README.md)**: GraphQL gateway service
 - **[E2E Tests](../ebay-service-e2e/README.md)**: End-to-end test suite
@@ -234,7 +234,7 @@ See `k8s/ebay-service-*.yaml` for deployment manifests.
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **[Product API](http://localhost:4100/products/123)**: Example product endpoint
 - **[Health Status](http://localhost:4100/health)**: Service health check
