@@ -8,7 +8,7 @@ Event-driven messaging utilities for the Integral-X monorepo, providing KafkaJS-
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -50,7 +50,7 @@ export class YourService {
 
 ---
 
-## 🏗️ Library Structure
+## Library Structure
 
 ### Directory Layout
 
@@ -70,14 +70,14 @@ libs/messaging/
 
 ### Core Components
 
-- **🔄 KafkaService**: Kafka client wrapper and utilities
-- **📦 MessagingModule**: NestJS module for dependency injection
-- **🧪 Mocks**: Testing utilities and mock implementations
-- **🔗 Exports**: Centralized library exports
+- **KafkaService**: Kafka client wrapper and utilities
+- **MessagingModule**: NestJS module for dependency injection
+- **Mocks**: Testing utilities and mock implementations
+- **Exports**: Centralized library exports
 
 ---
 
-## 🔧 API Reference
+## API Reference
 
 ### KafkaService
 
@@ -158,7 +158,7 @@ export class YourModule {}
 
 ---
 
-## 🔄 Event Patterns
+## Event Patterns
 
 ### Producer Pattern
 
@@ -234,7 +234,7 @@ export class EventConsumer implements OnModuleInit {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -317,7 +317,7 @@ describe("Kafka Integration", () => {
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -344,7 +344,7 @@ const kafkaConfig = {
 
 ---
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Health Check Producer
 
@@ -400,7 +400,7 @@ export class ProductConsumer {
 
 ---
 
-## 🔗 Integration
+## Integration
 
 ### With API Gateway
 
@@ -436,7 +436,7 @@ export class AppModule {}
 
 ---
 
-## 🛡️ Best Practices
+## Best Practices
 
 ### Error Handling
 
@@ -512,7 +512,7 @@ async publishEvent<T>(topic: string, type: string, data: T) {
 
 ---
 
-## 📚 Related Libraries
+## Related Libraries
 
 - **[Common Library](../common/README.md)**: Shared types and utilities
 - **[Observability Library](../observability/README.md)**: Logging and monitoring
@@ -520,7 +520,7 @@ async publishEvent<T>(topic: string, type: string, data: T) {
 
 ---
 
-## 🔧 Development
+## Development
 
 ### Building the Library
 
