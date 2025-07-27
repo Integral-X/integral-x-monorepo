@@ -8,7 +8,7 @@ End-to-end test suite for the eBay microservice, providing comprehensive integra
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -33,7 +33,7 @@ npm run test:watch
 
 ---
 
-## 🏗️ Test Structure
+## Test Structure
 
 ### Directory Layout
 
@@ -59,7 +59,7 @@ apps/ebay-service-e2e/
 
 ---
 
-## 🧪 Test Scenarios
+## Test Scenarios
 
 ### Health Endpoint Tests
 
@@ -103,7 +103,7 @@ describe("Product API", () => {
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Jest Configuration
 
@@ -130,7 +130,7 @@ Tests automatically configure a test environment with:
 
 ---
 
-## 📊 Test Reports
+## Test Reports
 
 ### Coverage Reports
 
@@ -151,7 +151,7 @@ open coverage/lcov-report/index.html
 
 ---
 
-## 🚀 CI/CD Integration
+## CI/CD Integration
 
 ### GitHub Actions
 
@@ -172,7 +172,7 @@ docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 
 ---
 
-## 🔍 Debugging Tests
+## Debugging Tests
 
 ### Local Debugging
 
@@ -196,7 +196,7 @@ npm test -- --verbose
 
 ---
 
-## 📚 Best Practices
+## Best Practices
 
 ### Writing E2E Tests
 
@@ -215,7 +215,7 @@ npm test -- --verbose
 
 ---
 
-## 🔗 Related Documentation
+## Related Documentation
 
 - **[eBay Service](../ebay-service/README.md)**: Main service documentation
 - **[API Gateway](../api-gateway/README.md)**: Gateway service
@@ -224,7 +224,7 @@ npm test -- --verbose
 
 ---
 
-## 📄 Notes
+## Notes
 
 - This package is **not a deployable service** - it's for testing only
 - Tests use workspace path aliases for maintainability

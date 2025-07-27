@@ -9,7 +9,7 @@ Comprehensive observability utilities for the Integral-X monorepo, providing str
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -41,7 +41,7 @@ initTracing("api-gateway", "localhost", 6832);
 
 ---
 
-## 🏗️ Library Structure
+## Library Structure
 
 ### Directory Layout
 
@@ -68,7 +68,7 @@ libs/observability/
 
 ---
 
-## 🔧 API Reference
+## API Reference
 
 ### Logger
 
@@ -194,7 +194,7 @@ try {
 
 ---
 
-## 📊 Monitoring Integration
+## Monitoring Integration
 
 ### Health Endpoints
 
@@ -263,7 +263,7 @@ export function observabilityMiddleware(
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -313,7 +313,7 @@ describe("Metrics", () => {
 
 ---
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### API Gateway Integration
 
@@ -432,7 +432,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -474,7 +474,7 @@ const customLogger = winston.createLogger({
 
 ---
 
-## 🔗 Integration
+## Integration
 
 ### With API Gateway
 
@@ -516,7 +516,7 @@ CMD ["node", "dist/main.js"]
 
 ---
 
-## 📈 Production Monitoring
+## Production Monitoring
 
 ### Prometheus Integration
 
@@ -570,7 +570,7 @@ groups:
 
 ---
 
-## 📚 Related Libraries
+## Related Libraries
 
 - **[Common Library](../common/README.md)**: Shared types and error handling
 - **[Auth Library](../auth/README.md)**: Authentication and authorization
@@ -578,7 +578,7 @@ groups:
 
 ---
 
-## 🔧 Development
+## Development
 
 ### Building the Library
 
@@ -599,6 +599,6 @@ npx nx lint @integral-x/observability
 
 ---
 
-## 📄 License
+## License
 
 Copyright (c) 2025 Integral-X. All rights reserved.
