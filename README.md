@@ -9,7 +9,7 @@ Enterprise-grade, scalable microservices architecture for integrating major mark
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ docker-compose up --build
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ### System Architecture
 
@@ -91,7 +91,7 @@ docker-compose up --build
 
 ---
 
-## 🛠️ Development
+## Development
 
 ### Available Commands
 
@@ -170,7 +170,7 @@ cd apps/ebay-service-e2e && npm test
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 integral-x-monorepo/
@@ -205,7 +205,7 @@ integral-x-monorepo/
 
 ---
 
-## 🔧 Tech Stack & Architecture Decisions
+## Tech Stack & Architecture Decisions
 
 | Component            | Technology          | Rationale                                             |
 | -------------------- | ------------------- | ----------------------------------------------------- |
@@ -224,7 +224,7 @@ integral-x-monorepo/
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 ### Core Capabilities
 
@@ -253,7 +253,7 @@ integral-x-monorepo/
 
 ---
 
-## 📖 Additional Documentation
+## Additional Documentation
 
 - **[Architecture](ARCHITECTURE.md)**: System design and patterns
 - **[API Gateway](apps/api-gateway/README.md)**: GraphQL gateway documentation
@@ -262,7 +262,7 @@ integral-x-monorepo/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. **Code Quality**: Run `yarn spotless` before committing
 2. **Testing**: Ensure all tests pass with `yarn test:all`
@@ -271,7 +271,7 @@ integral-x-monorepo/
 
 ---
 
-## 📄 License
+## License
 
 Copyright (c) 2025 Integral-X. All rights reserved.
 

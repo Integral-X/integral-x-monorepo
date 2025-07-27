@@ -88,7 +88,7 @@ apps/ebay-service-e2e/
 
 ---
 
-### ✅ Example Flow: `getProductById(id)`
+### Example Flow: `getProductById(id)`
 
 1. **Frontend** calls:
 
