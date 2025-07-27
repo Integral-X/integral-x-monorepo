@@ -8,7 +8,7 @@ Shared types, utilities, and error handling components for the Integral-X monore
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -40,7 +40,7 @@ app.useGlobalFilters(new AllExceptionsFilter());
 
 ---
 
-## 🏗️ Library Structure
+## Library Structure
 
 ### Directory Layout
 
@@ -65,7 +65,7 @@ libs/common/
 
 ---
 
-## 🔧 API Reference
+## API Reference
 
 ### Types
 
@@ -153,7 +153,7 @@ app.useGlobalFilters(new AllExceptionsFilter());
 
 ---
 
-## 🚨 Error Handling
+## Error Handling
 
 ### Exception Types
 
@@ -187,7 +187,7 @@ logger.error("Request error", {
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -225,7 +225,7 @@ describe("AllExceptionsFilter", () => {
 
 ---
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Type-Safe Controllers
 
@@ -275,7 +275,7 @@ export class DataService {
 
 ---
 
-## 🔗 Integration
+## Integration
 
 ### With API Gateway
 
@@ -316,7 +316,7 @@ export class ProtectedController {
 
 ---
 
-## 📚 Related Libraries
+## Related Libraries
 
 - **[Auth Library](../auth/README.md)**: Authentication and authorization
 - **[Observability Library](../observability/README.md)**: Logging and monitoring
@@ -324,7 +324,7 @@ export class ProtectedController {
 
 ---
 
-## 🔧 Development
+## Development
 
 ### Adding New Types
 
@@ -356,6 +356,6 @@ export function newUtilityFunction(input: string): string {
 
 ---
 
-## 📄 License
+## License
 
 Copyright (c) 2025 Integral-X. All rights reserved.
