@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
  */
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ProductRepository } from "../repositories/product.repository";
 import { ProductCacheService } from "../cache/product.cache.service";
 import { EbayApiAdapter } from "../external/ebay-api.adapter";
@@ -14,7 +14,6 @@ export class ProductService {
     private readonly productRepository: ProductRepository,
     private readonly cacheService: ProductCacheService,
     private readonly ebayApiAdapter: EbayApiAdapter,
-    private readonly logger: Logger = new Logger(ProductService.name),
   ) {}
 
   /**

@@ -1,8 +1,7 @@
 /*
  * Copyright (c) 2025 Integral-X or Integral-X affiliate company. All rights reserved.
  */
-import { Injectable, Inject, Logger } from "@nestjs/common";
-import { RedisClientType } from "redis";
+import { Injectable, Inject } from "@nestjs/common";
 import { Product } from "../types/product.types";
 import { ConfigService } from "@nestjs/config";
 
@@ -11,9 +10,8 @@ export class ProductCacheService {
   private readonly cacheTtl: number;
 
   constructor(
-    @Inject("REDIS_CLIENT") private readonly redisClient: RedisClientType,
+    @Inject("REDIS_CLIENT") private readonly redisClient: any,
     private readonly configService: ConfigService,
-    private readonly logger: Logger = new Logger(ProductCacheService.name),
   ) {
     this.cacheTtl =
       this.configService.get<number>("REDIS_CACHE_TTL_SECONDS") ?? 3600;

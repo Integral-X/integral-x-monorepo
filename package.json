@@ -12,16 +12,26 @@
     "test": "nx test",
     "lint": "nx lint",
     "format": "nx format:write",
-    "spotless": "node tools/add-license-header.js && eslint . --ext .ts --fix && npx nx format:write && npx nx run-many --target=lint --all"
+    "build:api-gateway": "nx build @integral-x/observability && nx build common && nx build @integral-x/auth && nx build @integral-x/messaging && nx build api-gateway",
+    "build:ebay-service": "nx build @integral-x/observability && nx build common && nx build @integral-x/auth && nx build @integral-x/messaging && nx build ebay-service",
+    "build:all": "nx build @integral-x/observability && nx build common && nx build @integral-x/auth && nx build @integral-x/messaging && nx build api-gateway && nx build ebay-service",
+    "test:all": "nx test api-gateway && nx test ebay-service && nx test ebay-service-e2e && nx test @integral-x/auth && nx test tools",
+    "lint:all": "nx run-many --target=lint --all",
+    "format:all": "nx run-many --target=format:write --all",
+    "spotless": "node tools/add-license-header.js && eslint . --ext .ts --fix && npx prettier --write \"**/*.{ts,js,json,md}\" && echo \"✅ Code formatting and linting completed successfully!\"",
+    "spotless:check": "eslint . --ext .ts && npx prettier --check \"**/*.{ts,js,json,md}\" && echo \"✅ Code formatting check passed!\"",
+    "validate:build": "npx ts-node tools/validate-build-config.ts",
+    "prebuild:all": "npm run validate:build"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-typescript": "^7.27.1",
-    "@nrwl/node": "latest",
     "@nrwl/nx": "latest",
-    "@nrwl/workspace": "latest",
+    "@nx/eslint": "^21.3.7",
+    "@nx/jest": "^21.3.7",
+    "@nx/js": "^21.3.7",
     "@types/express-rate-limit": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
@@ -30,12 +40,13 @@
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "nx": "^21.3.7",
     "prettier": "^3.6.2",
     "tsconfig-paths-jest": "^0.0.1",
     "typescript": "^5.0.0",
     "typescript-eslint": "^8.37.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }

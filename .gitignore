@@ -18,8 +18,6 @@ yarn-error.log*
 
 # Docker
 *.local
-Dockerfile*
-.dockerignore
 
 # Nx/Monorepo
 .nx/
@@ -39,3 +37,4 @@ package-lock.json
 
 # Ignore generated types and artifacts
 **/generated/
+.github/instructions/nx.instructions.md

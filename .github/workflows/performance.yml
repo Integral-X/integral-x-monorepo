@@ -1,0 +1,155 @@
+name: Performance Tests
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Run daily at 2 AM UTC
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'libs/**'
+      - 'docker-compose.yml'
+      - 'Dockerfile.*'
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+
+jobs:
+  performance-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'yarn'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      - name: Start services with Docker Compose
+        run: |
+          docker-compose up -d
+          sleep 60 # Wait for services to be ready
+      
+      - name: Wait for services to be healthy
+        run: |
+          timeout 300 bash -c 'until curl -f http://localhost:4000/health; do sleep 5; done'
+          timeout 300 bash -c 'until curl -f http://localhost:4100/health; do sleep 5; done'
+      
+      - name: Install k6 for load testing
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+      
+      - name: Create performance test script
+        run: |
+          cat > performance-test.js << 'EOF'
+          import http from 'k6/http';
+          import { check, sleep } from 'k6';
+          
+          export let options = {
+            stages: [
+              { duration: '2m', target: 10 }, // Ramp up
+              { duration: '5m', target: 10 }, // Stay at 10 users
+              { duration: '2m', target: 20 }, // Ramp up to 20 users
+              { duration: '5m', target: 20 }, // Stay at 20 users
+              { duration: '2m', target: 0 },  // Ramp down
+            ],
+            thresholds: {
+              http_req_duration: ['p(95)<500'], // 95% of requests must complete below 500ms
+              http_req_failed: ['rate<0.1'],   // Error rate must be below 10%
+            },
+          };
+          
+          export default function() {
+            // Test API Gateway health
+            let gatewayResponse = http.get('http://localhost:4000/health');
+            check(gatewayResponse, {
+              'API Gateway status is 200': (r) => r.status === 200,
+              'API Gateway response time < 200ms': (r) => r.timings.duration < 200,
+            });
+            
+            // Test eBay Service health
+            let ebayResponse = http.get('http://localhost:4100/health');
+            check(ebayResponse, {
+              'eBay Service status is 200': (r) => r.status === 200,
+              'eBay Service response time < 200ms': (r) => r.timings.duration < 200,
+            });
+            
+            // Test eBay Service product endpoint
+            let productResponse = http.get('http://localhost:4100/products/123');
+            check(productResponse, {
+              'Product endpoint status is 200': (r) => r.status === 200,
+              'Product endpoint response time < 500ms': (r) => r.timings.duration < 500,
+            });
+            
+            // Test GraphQL endpoint
+            let graphqlResponse = http.post('http://localhost:4000/graphql', 
+              JSON.stringify({ query: '{ health }' }),
+              { headers: { 'Content-Type': 'application/json' } }
+            );
+            check(graphqlResponse, {
+              'GraphQL endpoint status is 200': (r) => r.status === 200,
+              'GraphQL endpoint response time < 300ms': (r) => r.timings.duration < 300,
+            });
+            
+            sleep(1);
+          }
+          EOF
+      
+      - name: Run performance tests
+        run: k6 run performance-test.js --out json=performance-results.json
+      
+      - name: Generate performance report
+        run: |
+          echo "## Performance Test Results" > performance-report.md
+          echo "" >> performance-report.md
+          echo "### Summary" >> performance-report.md
+          echo "- Test Duration: ~16 minutes" >> performance-report.md
+          echo "- Max Virtual Users: 20" >> performance-report.md
+          echo "- Test Date: $(date)" >> performance-report.md
+          echo "" >> performance-report.md
+          
+          # Extract key metrics from k6 results
+          if [ -f performance-results.json ]; then
+            echo "### Key Metrics" >> performance-report.md
+            echo "- Results saved to performance-results.json" >> performance-report.md
+          fi
+      
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: |
+            performance-results.json
+            performance-report.md
+      
+      - name: Stop services
+        if: always()
+        run: docker-compose down -v
+      
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            if (fs.existsSync('performance-report.md')) {
+              const report = fs.readFileSync('performance-report.md', 'utf8');
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## 🚀 Performance Test Results\n\n${report}`
+              });
+            }

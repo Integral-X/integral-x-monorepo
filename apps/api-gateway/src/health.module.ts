@@ -4,7 +4,7 @@
 import { Module } from "@nestjs/common";
 import { HealthController } from "./health.controller";
 import { HealthProducer } from "./messaging/health.producer";
-import { MessagingModule } from "../../../libs/messaging/src";
+import { MessagingModule } from "@integral-x/messaging";
 
 @Module({
   imports: [MessagingModule],
