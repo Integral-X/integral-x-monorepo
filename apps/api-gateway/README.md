@@ -8,7 +8,7 @@ GraphQL API Gateway for the Integral-X Marketplace Integration platform. Serves 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Local Development
 
@@ -31,15 +31,15 @@ docker-compose up api-gateway
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Features
 
-- **🔗 GraphQL Federation**: Unified schema across microservices
-- **🔐 JWT Authentication**: Secure API access
-- **⚡ Rate Limiting**: Request throttling and protection
-- **📊 Observability**: Metrics, logging, and tracing
-- **🚀 Event Publishing**: Kafka message production
+- **GraphQL Federation**: Unified schema across microservices
+- **JWT Authentication**: Secure API access
+- **Rate Limiting**: Request throttling and protection
+- **Observability**: Metrics, logging, and tracing
+- **Event Publishing**: Kafka message production
 
 ### Request Flow
 
@@ -68,7 +68,7 @@ src/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -100,7 +100,7 @@ To add a new federated service:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Unit tests
@@ -129,7 +129,7 @@ curl -X POST http://localhost:4000/graphql \
 
 ---
 
-## 📊 Monitoring
+## Monitoring
 
 ### Health Checks
 
@@ -151,7 +151,7 @@ curl -X POST http://localhost:4000/graphql \
 
 ---
 
-## 🔐 Security
+## Security
 
 ### Authentication
 
@@ -173,7 +173,7 @@ curl -X POST http://localhost:4000/graphql \
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Docker
 
@@ -191,7 +191,7 @@ See `k8s/api-gateway-*.yaml` for deployment manifests.
 
 ---
 
-## 🔗 Related Services
+## Related Services
 
 - **[eBay Service](../ebay-service/README.md)**: Product data microservice
 - **[Messaging Library](../../libs/messaging/README.md)**: Kafka utilities
@@ -200,7 +200,7 @@ See `k8s/api-gateway-*.yaml` for deployment manifests.
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **[GraphQL Playground](http://localhost:4000/graphql)**: Interactive query interface
 - **[Health Endpoint](http://localhost:4000/health)**: Service health status
