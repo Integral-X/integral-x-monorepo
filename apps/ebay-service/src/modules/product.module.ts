@@ -13,6 +13,7 @@ import { EbayApiAdapter } from "../external/ebay-api.adapter";
 import { ProductConsumer } from "../kafka/consumers/product.consumer";
 import { ProductProducer } from "../kafka/producers/product.producer";
 import { ProductEntity } from "../entities/product.entity";
+import { redisProvider } from "../config/redis.config";
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ProductEntity } from "../entities/product.entity";
     EbayApiAdapter,
     ProductConsumer,
     ProductProducer,
+    redisProvider,
   ],
 })
 export class ProductModule {}
