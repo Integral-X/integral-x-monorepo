@@ -1,14 +1,14 @@
 {
   "name": "@integral-x/auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@nestjs/jwt": "^11.0.0",
-    "@nestjs/config": "^4.0.2"
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/jwt": "^11.0.0"
   },
   "devDependencies": {
     "@golevelup/ts-jest": "^0.7.0",
