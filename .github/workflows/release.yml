@@ -69,7 +69,6 @@ jobs:
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
           # Reset package.json changes
-          git checkout package.json
 
       - name: Create release tag
         run: |
