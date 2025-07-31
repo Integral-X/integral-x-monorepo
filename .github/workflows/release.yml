@@ -1,8 +1,6 @@
 name: Release
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       release-type:
@@ -17,33 +15,12 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
-  actions: write
-  checks: write
-  deployments: write
-  issues: write
-  packages: write
-  pages: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
-      pull-requests: write
-      actions: write
-      checks: write
-      deployments: write
-      issues: write
-      packages: write
-      pages: write
-      repository-projects: write
-      security-events: write
-      statuses: write
 
     steps:
       - name: Checkout code
@@ -83,20 +60,8 @@ jobs:
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
-          # Determine version bump type
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            BUMP_TYPE="${{ github.event.inputs.release-type }}"
-          else
-            # Auto-determine based on commit messages
-            if git log --format=%B -n 20 | grep -q "BREAKING CHANGE\|feat!"; then
-              BUMP_TYPE="major"
-            elif git log --format=%B -n 20 | grep -q "^feat"; then
-              BUMP_TYPE="minor"
-            else
-              BUMP_TYPE="patch"
-            fi
-          fi
-
+          # Use the input release type
+          BUMP_TYPE="${{ github.event.inputs.release-type }}"
           echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
 
           # Calculate new version
@@ -104,58 +69,18 @@ jobs:
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
           # Reset package.json changes
-          git checkout package.json
 
-      - name: Update version in all packages
-        run: |
-          # Update root package.json
-          yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version
-
-          # Update app package.json files
-          cd apps/api-gateway && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-          cd apps/ebay-service && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-
-          # Update lib package.json files
-          cd libs/auth && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-          cd libs/messaging && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-          cd libs/observability && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-          cd libs/common && yarn version --new-version ${{ steps.version.outputs.new_version }} --no-git-tag-version && cd ../..
-
-      - name: Commit version changes
+      - name: Create release tag
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "chore: bump version to v${{ steps.version.outputs.new_version }} [skip ci]"
           git tag -a "v${{ steps.version.outputs.new_version }}" -m "Release v${{ steps.version.outputs.new_version }}"
 
-      - name: Push changes
+      - name: Push tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Try direct push first
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-          # Attempt to push directly (may fail due to branch protection)
-          if ! git push origin main; then
-            echo "Direct push failed, attempting to bypass branch protection..."
-            
-            # Create a temporary branch and PR approach as fallback
-            TEMP_BRANCH="release/v${{ steps.version.outputs.new_version }}-$(date +%s)"
-            git checkout -b "$TEMP_BRANCH"
-            git push origin "$TEMP_BRANCH"
-            
-            # Create PR and auto-merge using GitHub CLI
-            gh pr create --title "chore: bump version to v${{ steps.version.outputs.new_version }}" \
-                        --body "Automated version bump for release v${{ steps.version.outputs.new_version }}" \
-                        --base main --head "$TEMP_BRANCH"
-            
-            # Auto-merge the PR (requires auto-merge to be enabled)
-            gh pr merge "$TEMP_BRANCH" --admin --squash --delete-branch
-          fi
-
-          # Push the tag
           git push origin "v${{ steps.version.outputs.new_version }}"
 
       - name: Create GitHub Release
