@@ -2149,20 +2149,6 @@
     tslib "^2.3.0"
     yargs-parser "21.1.1"
 
-"@nx/devkit@21.3.7":
-  version "21.3.7"
-  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-21.3.7.tgz#714657caa39039a836a7d98d1d3ddd72069f0edc"
-  integrity sha512-clqOhLHvGXelJDq0blfrPMvJ88TTMhlxKvbuj+mxpfXCcHIYlhuHeH63u99eO4wEbVtSopOG4szpABSjRXJESw==
-  dependencies:
-    ejs "^3.1.7"
-    enquirer "~2.3.6"
-    ignore "^5.0.4"
-    minimatch "9.0.3"
-    semver "^7.5.3"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-    yargs-parser "21.1.1"
-
 "@nx/eslint@^21.3.11":
   version "21.3.11"
   resolved "https://registry.yarnpkg.com/@nx/eslint/-/eslint-21.3.11.tgz#c5c8443a2a2172e8a17a1eeb496d755e5af6d6a8"
@@ -2174,15 +2160,15 @@
     tslib "^2.3.0"
     typescript "~5.8.2"
 
-"@nx/jest@^21.3.7":
-  version "21.3.7"
-  resolved "https://registry.yarnpkg.com/@nx/jest/-/jest-21.3.7.tgz#a0e951deef59ca68ab081c824c55ed6386f6023e"
-  integrity sha512-77r1cV2AYzxkEsa4qKrMn5TuijfSR52Lwu7t8aSj7rdi1MYQoWhkW6sEgoh9+XnJ+yoksYjc3K9vKyco6R488w==
+"@nx/jest@^21.3.11":
+  version "21.3.11"
+  resolved "https://registry.yarnpkg.com/@nx/jest/-/jest-21.3.11.tgz#033290ea4c69dbfeca14be925cfdb84354b6981f"
+  integrity sha512-PkdNWeoUY81zr+jtUapBdvvh26lWYIhDNyUwTjIBFajX8EAlhJpvShKHs7QObmrwOMLMXwLHKINiSCw9rueOBQ==
   dependencies:
     "@jest/reporters" "^30.0.2"
     "@jest/test-result" "^30.0.2"
-    "@nx/devkit" "21.3.7"
-    "@nx/js" "21.3.7"
+    "@nx/devkit" "21.3.11"
+    "@nx/js" "21.3.11"
     "@phenomnomnominal/tsquery" "~5.0.1"
     identity-obj-proxy "3.0.0"
     jest-config "^30.0.2"
@@ -2209,41 +2195,6 @@
     "@babel/runtime" "^7.22.6"
     "@nx/devkit" "21.3.11"
     "@nx/workspace" "21.3.11"
-    "@zkochan/js-yaml" "0.0.7"
-    babel-plugin-const-enum "^1.0.1"
-    babel-plugin-macros "^3.1.0"
-    babel-plugin-transform-typescript-metadata "^0.3.1"
-    chalk "^4.1.0"
-    columnify "^1.6.0"
-    detect-port "^1.5.1"
-    enquirer "~2.3.6"
-    ignore "^5.0.4"
-    js-tokens "^4.0.0"
-    jsonc-parser "3.2.0"
-    npm-package-arg "11.0.1"
-    npm-run-path "^4.0.1"
-    ora "5.3.0"
-    picocolors "^1.1.0"
-    picomatch "4.0.2"
-    semver "^7.5.3"
-    source-map-support "0.5.19"
-    tinyglobby "^0.2.12"
-    tslib "^2.3.0"
-
-"@nx/js@21.3.7":
-  version "21.3.7"
-  resolved "https://registry.yarnpkg.com/@nx/js/-/js-21.3.7.tgz#4882a3af13cd5a14ce5db3d3842442e261fc3910"
-  integrity sha512-oy+WcZqfYvOzhO+cefgwYVRIBULfVQk8J8prgw9kMuFcJRgOYXkkfB1HLdkxx+OrHGDPqs7Oe0+8KS1lilnumA==
-  dependencies:
-    "@babel/core" "^7.23.2"
-    "@babel/plugin-proposal-decorators" "^7.22.7"
-    "@babel/plugin-transform-class-properties" "^7.22.5"
-    "@babel/plugin-transform-runtime" "^7.23.2"
-    "@babel/preset-env" "^7.23.2"
-    "@babel/preset-typescript" "^7.22.5"
-    "@babel/runtime" "^7.22.6"
-    "@nx/devkit" "21.3.7"
-    "@nx/workspace" "21.3.7"
     "@zkochan/js-yaml" "0.0.7"
     babel-plugin-const-enum "^1.0.1"
     babel-plugin-macros "^3.1.0"
@@ -2375,20 +2326,6 @@
     chalk "^4.1.0"
     enquirer "~2.3.6"
     nx "21.3.11"
-    picomatch "4.0.2"
-    tslib "^2.3.0"
-    yargs-parser "21.1.1"
-
-"@nx/workspace@21.3.7":
-  version "21.3.7"
-  resolved "https://registry.yarnpkg.com/@nx/workspace/-/workspace-21.3.7.tgz#52c4ac47bba34f27a0c62fe2985923b752f0e23a"
-  integrity sha512-DIMb9Ts6w0FtKIglNEkAQ22w+b/4kx97MJDdK3tU1t0o0hG64XbYZ9xyVjnENVEkSKnSInAid/dBg+pMTgwxhA==
-  dependencies:
-    "@nx/devkit" "21.3.7"
-    "@zkochan/js-yaml" "0.0.7"
-    chalk "^4.1.0"
-    enquirer "~2.3.6"
-    nx "21.3.7"
     picomatch "4.0.2"
     tslib "^2.3.0"
     yargs-parser "21.1.1"
@@ -7324,7 +7261,7 @@ nx@21.3.11:
     "@nx/nx-win32-arm64-msvc" "21.3.11"
     "@nx/nx-win32-x64-msvc" "21.3.11"
 
-nx@21.3.7, nx@^21.3.7:
+nx@^21.3.7:
   version "21.3.7"
   resolved "https://registry.yarnpkg.com/nx/-/nx-21.3.7.tgz#5db66fcc2eb66e817da7de94fa41e17fab8b3e9a"
   integrity sha512-/PwRGg6wH10V8pJHe3RJnizbxjNL0owLARCegup39sk0+m/G/qOfot5KqReWQR4YrtDpreSE7+tRWGCCovyE1A==
