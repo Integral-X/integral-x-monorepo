@@ -43,7 +43,7 @@
     "nx": "^21.3.11",
     "prettier": "^3.6.2",
     "tsconfig-paths-jest": "^0.0.1",
-    "typescript": "^5.0.0",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.40.0"
   },
   "engines": {
