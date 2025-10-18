@@ -47,8 +47,6 @@ docker-compose up --build
 
 ### System Architecture
 
-![Architecture Diagram](Architecture.svg)
-
 ```
       ┌─────────────────┐
       │   Frontend App  │
@@ -64,8 +62,8 @@ docker-compose up --build
           ┌─────┼─────┐
           ▼     ▼     ▼
       ┌─────┐ ┌─────┐ ┌─────┐
-      │eBay │ │Amzn*│ │ ... │
-      │Svc  │ │Svc  │ │Svc  │
+      │eBay │ │Amzn │ │ ... │
+      │ Svc │ │ Svc │ │ Svc │
       └──┬──┘ └──┬──┘ └──┬──┘
          ▼       ▼       ▼
       ┌─────┐ ┌─────┐ ┌─────┐
@@ -205,7 +203,7 @@ integral-x-monorepo/
 
 ---
 
-## Tech Stack & Architecture Decisions
+## Tech Stack
 
 | Component            | Technology          | Rationale                                             |
 | -------------------- | ------------------- | ----------------------------------------------------- |
@@ -234,14 +232,6 @@ integral-x-monorepo/
 - **Enterprise Security**: JWT authentication, rate limiting, CORS
 - **Container-Ready**: Docker development and Kubernetes deployment
 - **Comprehensive Testing**: Unit, integration, and e2e test suites
-
-### Developer Experience
-
-- **Fast Development**: Hot reload, incremental builds
-- **Type Safety**: End-to-end TypeScript coverage
-- **Code Quality**: Automated linting, formatting, license headers
-- **Modern Tooling**: Nx workspace, ESLint, Prettier
-- **Documentation**: Comprehensive README files and inline docs
 
 ### Production Ready
 
