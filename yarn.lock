@@ -2135,20 +2135,6 @@
   dependencies:
     consola "^3.2.3"
 
-"@nx/devkit@21.3.11":
-  version "21.3.11"
-  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-21.3.11.tgz#105cc3185f7d029b00f1e9d26c7168819881ffd1"
-  integrity sha512-JOV8TAa9K5+ZwTA/EUi0g5qcKEg5vmi0AyOUsrNUHlv3BgQnwZtPLDDTPPZ+ezq24o6YzgwueZWj3CLEdMHEDg==
-  dependencies:
-    ejs "^3.1.7"
-    enquirer "~2.3.6"
-    ignore "^5.0.4"
-    minimatch "9.0.3"
-    semver "^7.5.3"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-    yargs-parser "21.1.1"
-
 "@nx/devkit@21.6.5":
   version "21.6.5"
   resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-21.6.5.tgz#adcf6cc8992aa05062ef43178569711105122d50"
@@ -2162,16 +2148,16 @@
     tslib "^2.3.0"
     yargs-parser "21.1.1"
 
-"@nx/eslint@^21.3.11":
-  version "21.3.11"
-  resolved "https://registry.yarnpkg.com/@nx/eslint/-/eslint-21.3.11.tgz#c5c8443a2a2172e8a17a1eeb496d755e5af6d6a8"
-  integrity sha512-9jeD8QuU3OMcItjtw0QHl5cwohLeA9R+lajNJoOjS2tUGXTHWb8NOcEZBXWMcML+eV1iloIDW8/P4jV4BYqP2w==
+"@nx/eslint@^21.6.5":
+  version "21.6.5"
+  resolved "https://registry.yarnpkg.com/@nx/eslint/-/eslint-21.6.5.tgz#7cf04b955147e637fd0f0394f4d06457c616a0cf"
+  integrity sha512-VSO0dFxNLnrsTKTg1iBbtex2nG/E+9XN4r1p/yvg1erczTa4Fe25ZoxBmd/ililA5IV8xK4L4EK2w0OIOuUAJw==
   dependencies:
-    "@nx/devkit" "21.3.11"
-    "@nx/js" "21.3.11"
+    "@nx/devkit" "21.6.5"
+    "@nx/js" "21.6.5"
     semver "^7.5.3"
     tslib "^2.3.0"
-    typescript "~5.8.2"
+    typescript "~5.9.2"
 
 "@nx/jest@^21.6.5":
   version "21.6.5"
@@ -2193,41 +2179,6 @@
     semver "^7.5.3"
     tslib "^2.3.0"
     yargs-parser "21.1.1"
-
-"@nx/js@21.3.11":
-  version "21.3.11"
-  resolved "https://registry.yarnpkg.com/@nx/js/-/js-21.3.11.tgz#84938bafa95e0c051060efe583e3e476c385bf40"
-  integrity sha512-aN8g1TP3FMN6MFLvMrZNaoqSwAkBFH1PunKQV17w4nlPkimWICaCP2DhY5W3VoOpjQBbhQoqrRt4mVfgnEpyvA==
-  dependencies:
-    "@babel/core" "^7.23.2"
-    "@babel/plugin-proposal-decorators" "^7.22.7"
-    "@babel/plugin-transform-class-properties" "^7.22.5"
-    "@babel/plugin-transform-runtime" "^7.23.2"
-    "@babel/preset-env" "^7.23.2"
-    "@babel/preset-typescript" "^7.22.5"
-    "@babel/runtime" "^7.22.6"
-    "@nx/devkit" "21.3.11"
-    "@nx/workspace" "21.3.11"
-    "@zkochan/js-yaml" "0.0.7"
-    babel-plugin-const-enum "^1.0.1"
-    babel-plugin-macros "^3.1.0"
-    babel-plugin-transform-typescript-metadata "^0.3.1"
-    chalk "^4.1.0"
-    columnify "^1.6.0"
-    detect-port "^1.5.1"
-    enquirer "~2.3.6"
-    ignore "^5.0.4"
-    js-tokens "^4.0.0"
-    jsonc-parser "3.2.0"
-    npm-package-arg "11.0.1"
-    npm-run-path "^4.0.1"
-    ora "5.3.0"
-    picocolors "^1.1.0"
-    picomatch "4.0.2"
-    semver "^7.5.3"
-    source-map-support "0.5.19"
-    tinyglobby "^0.2.12"
-    tslib "^2.3.0"
 
 "@nx/js@21.6.5", "@nx/js@^21.3.7":
   version "21.6.5"
@@ -2363,20 +2314,6 @@
   version "21.6.5"
   resolved "https://registry.yarnpkg.com/@nx/nx-win32-x64-msvc/-/nx-win32-x64-msvc-21.6.5.tgz#4faf93c61add4ed808d0efe477acb7a5a84c1e93"
   integrity sha512-KC0nK82N2suok1Q2J4sNavtAvVnF9QVivGs/7Wj4Gx3L14lyt/mq6I9f8eOyI1JAeSCRf0a7RhQKfDv8Qac4mQ==
-
-"@nx/workspace@21.3.11":
-  version "21.3.11"
-  resolved "https://registry.yarnpkg.com/@nx/workspace/-/workspace-21.3.11.tgz#1e3f1dc14c08f44303db95c6bbd877b484356f97"
-  integrity sha512-DD2iu9Ip/faNQ5MXZk+UbbBxGofYKjzHsXKRvMNQ/OAVzP/u9z2CPXEmRKlRAEQoy1lInmyopwfEUWwK1v4x0g==
-  dependencies:
-    "@nx/devkit" "21.3.11"
-    "@zkochan/js-yaml" "0.0.7"
-    chalk "^4.1.0"
-    enquirer "~2.3.6"
-    nx "21.3.11"
-    picomatch "4.0.2"
-    tslib "^2.3.0"
-    yargs-parser "21.1.1"
 
 "@nx/workspace@21.6.5":
   version "21.6.5"
@@ -7284,58 +7221,6 @@ npm-run-path@^4.0.1:
   dependencies:
     path-key "^3.0.0"
 
-nx@21.3.11, nx@^21.3.11:
-  version "21.3.11"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-21.3.11.tgz#84abf2c24eb7a134d8c6c2d83e3ba1ff367de04d"
-  integrity sha512-nj2snZ3mHZnbHcoB3NUdxbch9L1sQKV1XccLs1B79fmI/N5oOgWgctm/bWoZH2UH5b4A8ZLAMTsC6YnSJGbcaw==
-  dependencies:
-    "@napi-rs/wasm-runtime" "0.2.4"
-    "@yarnpkg/lockfile" "^1.1.0"
-    "@yarnpkg/parsers" "3.0.2"
-    "@zkochan/js-yaml" "0.0.7"
-    axios "^1.8.3"
-    chalk "^4.1.0"
-    cli-cursor "3.1.0"
-    cli-spinners "2.6.1"
-    cliui "^8.0.1"
-    dotenv "~16.4.5"
-    dotenv-expand "~11.0.6"
-    enquirer "~2.3.6"
-    figures "3.2.0"
-    flat "^5.0.2"
-    front-matter "^4.0.2"
-    ignore "^5.0.4"
-    jest-diff "^30.0.2"
-    jsonc-parser "3.2.0"
-    lines-and-columns "2.0.3"
-    minimatch "9.0.3"
-    node-machine-id "1.1.12"
-    npm-run-path "^4.0.1"
-    open "^8.4.0"
-    ora "5.3.0"
-    resolve.exports "2.0.3"
-    semver "^7.5.3"
-    string-width "^4.2.3"
-    tar-stream "~2.2.0"
-    tmp "~0.2.1"
-    tree-kill "^1.2.2"
-    tsconfig-paths "^4.1.2"
-    tslib "^2.3.0"
-    yaml "^2.6.0"
-    yargs "^17.6.2"
-    yargs-parser "21.1.1"
-  optionalDependencies:
-    "@nx/nx-darwin-arm64" "21.3.11"
-    "@nx/nx-darwin-x64" "21.3.11"
-    "@nx/nx-freebsd-x64" "21.3.11"
-    "@nx/nx-linux-arm-gnueabihf" "21.3.11"
-    "@nx/nx-linux-arm64-gnu" "21.3.11"
-    "@nx/nx-linux-arm64-musl" "21.3.11"
-    "@nx/nx-linux-x64-gnu" "21.3.11"
-    "@nx/nx-linux-x64-musl" "21.3.11"
-    "@nx/nx-win32-arm64-msvc" "21.3.11"
-    "@nx/nx-win32-x64-msvc" "21.3.11"
-
 nx@21.6.5:
   version "21.6.5"
   resolved "https://registry.yarnpkg.com/nx/-/nx-21.6.5.tgz#ccde79dfdc576d9387b6f7287422cc88e47c1bb0"
@@ -7387,6 +7272,58 @@ nx@21.6.5:
     "@nx/nx-linux-x64-musl" "21.6.5"
     "@nx/nx-win32-arm64-msvc" "21.6.5"
     "@nx/nx-win32-x64-msvc" "21.6.5"
+
+nx@^21.3.11:
+  version "21.3.11"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-21.3.11.tgz#84abf2c24eb7a134d8c6c2d83e3ba1ff367de04d"
+  integrity sha512-nj2snZ3mHZnbHcoB3NUdxbch9L1sQKV1XccLs1B79fmI/N5oOgWgctm/bWoZH2UH5b4A8ZLAMTsC6YnSJGbcaw==
+  dependencies:
+    "@napi-rs/wasm-runtime" "0.2.4"
+    "@yarnpkg/lockfile" "^1.1.0"
+    "@yarnpkg/parsers" "3.0.2"
+    "@zkochan/js-yaml" "0.0.7"
+    axios "^1.8.3"
+    chalk "^4.1.0"
+    cli-cursor "3.1.0"
+    cli-spinners "2.6.1"
+    cliui "^8.0.1"
+    dotenv "~16.4.5"
+    dotenv-expand "~11.0.6"
+    enquirer "~2.3.6"
+    figures "3.2.0"
+    flat "^5.0.2"
+    front-matter "^4.0.2"
+    ignore "^5.0.4"
+    jest-diff "^30.0.2"
+    jsonc-parser "3.2.0"
+    lines-and-columns "2.0.3"
+    minimatch "9.0.3"
+    node-machine-id "1.1.12"
+    npm-run-path "^4.0.1"
+    open "^8.4.0"
+    ora "5.3.0"
+    resolve.exports "2.0.3"
+    semver "^7.5.3"
+    string-width "^4.2.3"
+    tar-stream "~2.2.0"
+    tmp "~0.2.1"
+    tree-kill "^1.2.2"
+    tsconfig-paths "^4.1.2"
+    tslib "^2.3.0"
+    yaml "^2.6.0"
+    yargs "^17.6.2"
+    yargs-parser "21.1.1"
+  optionalDependencies:
+    "@nx/nx-darwin-arm64" "21.3.11"
+    "@nx/nx-darwin-x64" "21.3.11"
+    "@nx/nx-freebsd-x64" "21.3.11"
+    "@nx/nx-linux-arm-gnueabihf" "21.3.11"
+    "@nx/nx-linux-arm64-gnu" "21.3.11"
+    "@nx/nx-linux-arm64-musl" "21.3.11"
+    "@nx/nx-linux-x64-gnu" "21.3.11"
+    "@nx/nx-linux-x64-musl" "21.3.11"
+    "@nx/nx-win32-arm64-msvc" "21.3.11"
+    "@nx/nx-win32-x64-msvc" "21.3.11"
 
 object-assign@^4, object-assign@^4.1.1:
   version "4.1.1"
@@ -8791,10 +8728,15 @@ typescript-eslint@^8.40.0:
     "@typescript-eslint/typescript-estree" "8.40.0"
     "@typescript-eslint/utils" "8.40.0"
 
-typescript@5.8.3, typescript@^5.0.0, typescript@~5.8.2:
+typescript@5.8.3:
   version "5.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.3.tgz#92f8a3e5e3cf497356f4178c34cd65a7f5e8440e"
   integrity sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==
+
+typescript@^5.0.0, typescript@~5.9.2:
+  version "5.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.3.tgz#5b4f59e15310ab17a216f5d6cf53ee476ede670f"
+  integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
 
 uglify-js@^3.1.4:
   version "3.19.3"
