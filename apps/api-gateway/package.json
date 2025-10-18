@@ -18,7 +18,7 @@
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/auto-instrumentations-node": "^0.65.0",
     "@opentelemetry/exporter-jaeger": "^2.0.1",
-    "@opentelemetry/sdk-node": "^0.203.0",
+    "@opentelemetry/sdk-node": "^0.204.0",
     "@apollo/server": "^4.10.5",
     "graphql": "^16.0.0",
     "joi": "^18.0.0",
